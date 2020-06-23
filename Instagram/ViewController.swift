@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class ViewController: UIViewController {
 
@@ -25,6 +26,8 @@ class ViewController: UIViewController {
         email.backgroundColor = UIColor(white: 0, alpha: 0.03)
         email.borderStyle = .roundedRect
         email.font = UIFont.systemFont(ofSize: 14)
+        
+        email.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return email
     }()
     
@@ -35,6 +38,8 @@ class ViewController: UIViewController {
         username.backgroundColor = UIColor(white: 0, alpha: 0.03)
         username.borderStyle = .roundedRect
         username.font = UIFont.systemFont(ofSize: 14)
+        
+        username.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return username
         
     }()
@@ -47,6 +52,8 @@ class ViewController: UIViewController {
         password.borderStyle = .roundedRect
         password.font = UIFont.systemFont(ofSize: 14)
         password.isSecureTextEntry = true
+        
+        password.addTarget(self, action: #selector(handleTextInputChange), for: .editingChanged)
         return password
     }()
     
@@ -54,12 +61,42 @@ class ViewController: UIViewController {
         let button = UIButton(type: .system)
         button.setTitle("Sign Up", for: .normal)
         button.setTitleColor(.white, for: .normal)
-        button.backgroundColor = UIColor(red: 149/255, green: 204/255, blue: 244/255, alpha: 1.0)
+        button.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        return button
         
+        button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        return button
     }()
+    
+    //MARK: - Action methods for selectors
+    
+    @objc func handleSignUp() {
+        
+        guard let email = emailTextField.text, let password = passwordTextField.text, let username = usernameTextField.text, username.count > 0 else {
+            return
+        }
+        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+            if let error = error {
+                return
+            }
+                
+        }
+    }
+    
+    @objc func handleTextInputChange() {
+        let isFormValid = emailTextField.text?.count ?? 0 > 0 &&
+                          usernameTextField.text?.count ?? 0 > 0 &&
+                          passwordTextField.text?.count ?? 0 > 0
+
+        if isFormValid {
+            signUpButton.isEnabled = true
+            signUpButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        } else {
+            signUpButton.isEnabled = false
+            signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
+        }
+    }
     
     //MARK: - View Controller lifecycle
     
@@ -97,12 +134,13 @@ class ViewController: UIViewController {
            plusPhotoButton.heightAnchor.constraint(equalToConstant: 140),
            plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
            plusPhotoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-            
-           
 
         ])
 
         
     }
+    
+
 }
+
 
