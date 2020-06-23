@@ -75,13 +75,13 @@ class ViewController: UIViewController {
         
         guard let email = emailTextField.text, let password = passwordTextField.text, let username = usernameTextField.text, username.count > 0 else {
             return
-        }
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if let error = error {
-                return
-            }
-                
-        }
+//        }
+//        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
+//            if let error = error {
+//                return
+//            }
+//                
+//        }
     }
     
     @objc func handleTextInputChange() {
