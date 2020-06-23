@@ -9,13 +9,15 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
 
     //MARK: - Properties
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo")?.withRenderingMode(.alwaysOriginal), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(handlePlusPhoto), for: .touchUpInside)
         return button
     }()
     
@@ -75,15 +77,58 @@ class ViewController: UIViewController {
         
         guard let email = emailTextField.text, let password = passwordTextField.text, let username = usernameTextField.text, username.count > 0 else {
             return
-//        }
-//        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-//            if let error = error {
-//                return
-//            }
-//                
-//        }
+        }
+        Auth.auth().createUser(withEmail: email, password: password)
+            { (user, error) in
+            if let error = error {
+                print (error)
+                return
+            }
+                
+            guard let image  = self.plusPhotoButton.imageView?.image else { return }
+            guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
+                
+                let fileName = NSUUID().uuidString
+                let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
+                    
+                    storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                    
+            if let error = error {
+                    print (error)
+                    return
+                }
+                    storageRef.downloadURL { (url, error) in
+                        
+            if let error = error {
+                    print(error)
+                    return
+                } else {
+                    storageRef.downloadURL { (url, error) in
+                        print(url?.absoluteString ?? "")
+                        
+            guard let uid = user?.user.uid  else { return }
+            guard let photo = url?.absoluteString else { return }
+                        
+                        let usernameValues = ["username": username, "email": email, "photo": photo]
+                    let valuse = [uid: usernameValues]
+         
+         Database.database().reference().child("users").updateChildValues(valuse)
+            { (error, ref) in
+                
+            if let error = error {
+                    print (error)
+                    return
+                }
+                    print ("Saved succesfully")
+                }
+            }
+          }
+     }
     }
-    
+   }
+ }
+
+
     @objc func handleTextInputChange() {
         let isFormValid = emailTextField.text?.count ?? 0 > 0 &&
                           usernameTextField.text?.count ?? 0 > 0 &&
@@ -97,6 +142,36 @@ class ViewController: UIViewController {
             signUpButton.backgroundColor = UIColor.rgb(red: 149, green: 204, blue: 244)
         }
     }
+    
+    @objc func handlePlusPhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.allowsEditing = true
+        present(imagePickerController, animated: true, completion: nil)
+    }
+
+    //MARK: - UIImagePickerControllerDelegate
+
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        if let editedImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerEditedImage")] as? UIImage {
+            
+            plusPhotoButton.setImage(editedImage.withRenderingMode(.alwaysOriginal), for: .normal)
+
+        } else if let originalImage = info[UIImagePickerController.InfoKey(rawValue: "UIImagePickerControllerOriginalImage")] as? UIImage {
+            
+            plusPhotoButton.setImage(originalImage.withRenderingMode(.alwaysOriginal), for: .normal)
+        }
+        
+        plusPhotoButton.layer.cornerRadius = plusPhotoButton.frame.width/2
+        plusPhotoButton.layer.masksToBounds = true
+        plusPhotoButton.layer.borderColor = UIColor.black.cgColor
+        plusPhotoButton.layer.borderWidth = 3
+        
+        dismiss(animated: true, completion: nil)
+        
+    }
+    
     
     //MARK: - View Controller lifecycle
     
