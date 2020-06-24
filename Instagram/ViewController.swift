@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavigationControllerDelegate {
+class ViewController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
     //MARK: - Properties
     let plusPhotoButton: UIButton = {
@@ -75,9 +75,13 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
     
     @objc func handleSignUp() {
         
-        guard let email = emailTextField.text, let password = passwordTextField.text, let username = usernameTextField.text, username.count > 0 else {
-            return
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text,
+              let username = usernameTextField.text, username.count > 0 else {
+                
+              return
         }
+        
         Auth.auth().createUser(withEmail: email, password: password)
             { (user, error) in
             if let error = error {
@@ -88,29 +92,28 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
             guard let image  = self.plusPhotoButton.imageView?.image else { return }
             guard let uploadData = image.jpegData(compressionQuality: 0.3) else { return }
                 
-                let fileName = NSUUID().uuidString
-                let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
+                  let fileName = NSUUID().uuidString
+                  let storageRef = Storage.storage().reference().child("profile_image").child(fileName)
                     
-                    storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
+                  storageRef.putData(uploadData, metadata: nil) { (metadata, error) in
                     
             if let error = error {
                     print (error)
                     return
-                }
+            }
                     storageRef.downloadURL { (url, error) in
                         
             if let error = error {
                     print(error)
                     return
-                } else {
+            } else {
                     storageRef.downloadURL { (url, error) in
-                        print(url?.absoluteString ?? "")
-                        
+
             guard let uid = user?.user.uid  else { return }
             guard let photo = url?.absoluteString else { return }
                         
-                        let usernameValues = ["username": username, "email": email, "photo": photo]
-                    let valuse = [uid: usernameValues]
+                  let usernameValues = ["username": username, "email": email, "photo": photo]
+                  let valuse = [uid: usernameValues]
          
          Database.database().reference().child("users").updateChildValues(valuse)
             { (error, ref) in
@@ -118,15 +121,15 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
             if let error = error {
                     print (error)
                     return
-                }
-                    print ("Saved succesfully")
-                }
             }
+                    print ("Saved succesfully")
+            }
+           }
           }
-     }
-    }
-   }
- }
+         }
+        }
+       }
+      }
 
 
     @objc func handleTextInputChange() {
@@ -211,11 +214,7 @@ class ViewController: UIViewController, UIImagePickerControllerDelegate & UINavi
            plusPhotoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
 
         ])
-
-        
     }
-    
-
 }
 
 
