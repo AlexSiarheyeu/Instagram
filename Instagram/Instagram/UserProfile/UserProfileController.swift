@@ -9,6 +9,16 @@
 import UIKit
 import Firebase
 
+struct User {
+    let username: String
+    let photoImageUrl: String
+    
+    init(dictionary: [String: Any]) {
+        self.username = dictionary["username"] as? String ?? ""
+        self.photoImageUrl = dictionary["photo"] as? String ?? ""
+    }
+}
+
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +42,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.user = User(dictionary: dictionary)
             self.navigationItem.title = self.user?.username
             
+            self.collectionView.reloadData()
+            
         }) { (error) in
             print ("Failed to fetch user \(error)")
         }
@@ -44,7 +56,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "headerId", for: indexPath) as! UserProfileHeader
         
-                
+        header.user = self.user
         return header
     }
     //MARK: - UICollectionViewDelegateFlowLayout
@@ -54,13 +66,3 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
 }
 
-
-struct User {
-    let username: String
-    let photoImageUrl: String
-    
-    init(dictionary: [String: Any]) {
-        self.username = dictionary["username"] as? String ?? ""
-        self.photoImageUrl = dictionary["photo"] as? String ?? ""
-    }
-}

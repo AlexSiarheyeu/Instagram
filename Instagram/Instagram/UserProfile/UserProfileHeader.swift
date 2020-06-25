@@ -34,43 +34,37 @@ class UserProfileHeader: UICollectionViewCell {
         profileImageView.clipsToBounds = true
         
         backgroundColor = UIColor(white: 0, alpha: 0.04)
-        setupProfileImageView()
-        
     }
+    
+    var user: User? {
+        didSet {
+            setupProfileImageView()
+        }
+    }
+    
+    //MARK: Private methods
     
     fileprivate func setupProfileImageView() {
         
-        guard let uid = Auth.auth().currentUser?.uid else { return }
-
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-
-        guard let dictionary = snapshot.value as? [String: Any] else { return }
-
-        guard let profileImageUrl = dictionary["photo"] as? String else { return }
-
+        guard let profileImageUrl = user?.photoImageUrl else { return }
         guard let url = URL(string: profileImageUrl) else { return }
                    
         URLSession.shared.dataTask(with: url) { (data, response, error) in
                        
-            if let error = error {
-                print ("Failed to fetch profile image,\(error)")
-                return
-            }
-            
-            guard let data = data else { return }
-                
-                  let image = UIImage(data: data)
-                
-            DispatchQueue.main.async {
-                  self.profileImageView.image = image
-            }
-                
-            }.resume()
-
-                }) { (error) in
-                print ("Failed to fetch user \(error)")
-            }
+        if let error = error {
+            print ("Failed to fetch profile image,\(error)")
+            return
         }
+            
+        guard let data = data else { return }
+              let image = UIImage(data: data)
+                
+        DispatchQueue.main.async {
+              self.profileImageView.image = image
+        }
+                
+        }.resume()
+    }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
