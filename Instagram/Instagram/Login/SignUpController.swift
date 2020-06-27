@@ -153,7 +153,12 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
                     print (error)
                     return
             }
-                    print ("Saved succesfully")
+                    guard let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
+                               
+                    mainVC.setupViewControllers()
+                               
+                    self.dismiss(animated: true)
+                
             }
            }
           }

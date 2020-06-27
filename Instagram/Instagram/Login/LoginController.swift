@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginController: UIViewController {
     
@@ -15,8 +16,8 @@ class LoginController: UIViewController {
      
      override func viewDidLoad() {
          super.viewDidLoad()
+        
          view.backgroundColor = .white
-         
          navigationController?.isNavigationBarHidden = true
          
          view.addSubview(dontHaveAccountButton)
@@ -69,7 +70,7 @@ class LoginController: UIViewController {
         button.layer.cornerRadius = 5
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
-        //button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
+        button.addTarget(self, action: #selector(handleLogin), for: .touchUpInside)
         return button
     }()
     
@@ -126,9 +127,25 @@ class LoginController: UIViewController {
         }
     }
     
-//    @objc func handleLogin() {
-//
-//    }
+    @objc func handleLogin() {
+        
+        guard let email = emailTextField.text,
+              let password = passwordTextField.text else { return }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { (user, error) in
+            
+            if let error = error {
+                print ("Failed to sign in with email \(error)")
+                return
+            }
+            
+            guard let mainVC = UIApplication.shared.keyWindow?.rootViewController as? MainTabBarController else {return}
+            
+            mainVC.setupViewControllers()
+            
+            self.dismiss(animated: true)
+        }
+    }
     //MARK: - Private methods
     
     func setupUserLogInView() {
