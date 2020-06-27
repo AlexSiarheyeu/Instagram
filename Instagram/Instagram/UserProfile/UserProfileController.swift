@@ -20,6 +20,11 @@ struct User {
 }
 
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    
+    var user: User?
+    
+    //MARK: - View Controller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,10 +32,41 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerId")
         fetchUser()
+        
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
                 
-     fetchUser()
+        
+        setupLogOutButton()
+        fetchUser()
     }
-    var user: User?
+    //MARK: - Action methods for selectors
+
+    @objc func handleLogOut() {
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let actionLogOut = UIAlertAction(title: "Log out", style: .destructive) { (_) in
+            
+            do {
+                try Auth.auth().signOut()
+                
+            } catch let signOutError  {
+                print("\(signOutError)")
+            }
+            
+        }
+        
+        let actionCancel = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
+            print("cancel")
+        }
+        
+        alertController.addAction(actionCancel)
+        alertController.addAction(actionLogOut)
+
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    //MARK: - Private methods
+    
     fileprivate func fetchUser() {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -47,7 +83,11 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         }) { (error) in
             print ("Failed to fetch user \(error)")
         }
-        
+    }
+    
+    fileprivate func setupLogOutButton() {
+        let image = UIImage(named: "gear")?.withRenderingMode(.alwaysOriginal)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleLogOut))
     }
     
     //MARK: - UICollectionViewDataSource
@@ -58,6 +98,29 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         header.user = self.user
         return header
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return 7
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
+        cell.backgroundColor = .black
+            return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = (view.frame.width - 2) / 3
+        return CGSize(width: width, height: width)
+    }
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 1
     }
     //MARK: - UICollectionViewDelegateFlowLayout
     

@@ -7,9 +7,24 @@
 //
 
 import UIKit
+import Firebase
+
 class MainTabBarController: UITabBarController {
+    
+    //MARK: - View Controller Lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        //if user is not logged in, present controller
+        if Auth.auth().currentUser == nil {
+            let navVC = UINavigationController(rootViewController: LoginController())
+            
+            DispatchQueue.main.async {
+                self.present(navVC, animated: true)
+            }
+            return
+        }
         
         let layout = UICollectionViewFlowLayout()
         let vc = UserProfileController(collectionViewLayout: layout)

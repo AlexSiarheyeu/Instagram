@@ -11,6 +11,8 @@ import Firebase
 
 class UserProfileHeader: UICollectionViewCell {
     
+    //MARK: - Properties
+    
     var user: User? {
         didSet {
             setupProfileImageView()
@@ -58,7 +60,7 @@ class UserProfileHeader: UICollectionViewCell {
     let postsLabel: UILabel = {
        let posts = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "11\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
         
         attributedText.append(NSAttributedString(string: "posts", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
         
@@ -71,7 +73,7 @@ class UserProfileHeader: UICollectionViewCell {
     let followersLabel: UILabel = {
        let followers = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "156\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
                
         attributedText.append(NSAttributedString(string: "followers", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
         
@@ -84,7 +86,7 @@ class UserProfileHeader: UICollectionViewCell {
     let followingLabel: UILabel = {
        let following = UILabel()
         
-        let attributedText = NSMutableAttributedString(string: "6\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        let attributedText = NSMutableAttributedString(string: "0\n", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
                      
         attributedText.append(NSAttributedString(string: "following", attributes: [NSAttributedString.Key.foregroundColor: UIColor.lightGray, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16)]))
         
@@ -106,6 +108,8 @@ class UserProfileHeader: UICollectionViewCell {
         return edit
     }()
     
+    //MARK: - Setup header view
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -152,7 +156,7 @@ class UserProfileHeader: UICollectionViewCell {
         
         NSLayoutConstraint.activate([
             editProfileButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            editProfileButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 8),
+            editProfileButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 4),
             editProfileButton.leadingAnchor.constraint(equalTo: postsLabel.leadingAnchor),
             editProfileButton.trailingAnchor.constraint(equalTo: followingLabel.trailingAnchor),
 
@@ -183,16 +187,16 @@ class UserProfileHeader: UICollectionViewCell {
 
         NSLayoutConstraint.activate([
             stackView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            stackView.heightAnchor.constraint(equalToConstant: 70),
+            stackView.heightAnchor.constraint(equalToConstant: 50),
             stackView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
             
-            bottomDeviderView.bottomAnchor.constraint(equalTo: stackView.topAnchor),
-            bottomDeviderView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            bottomDeviderView.heightAnchor.constraint(equalToConstant: 0.5),
-            
-            topDeviderView.topAnchor.constraint(equalTo: self.topAnchor),
+            topDeviderView.bottomAnchor.constraint(equalTo: stackView.topAnchor),
             topDeviderView.widthAnchor.constraint(equalTo: self.widthAnchor),
-            topDeviderView.heightAnchor.constraint(equalToConstant: 0.5)
+            topDeviderView.heightAnchor.constraint(equalToConstant: 0.5),
+            
+            bottomDeviderView.topAnchor.constraint(equalTo: stackView.bottomAnchor),
+            bottomDeviderView.widthAnchor.constraint(equalTo: self.widthAnchor),
+            bottomDeviderView.heightAnchor.constraint(equalToConstant: 0.5)
         ])
     }
     
@@ -200,7 +204,7 @@ class UserProfileHeader: UICollectionViewCell {
         
         guard let profileImageUrl = user?.photoImageUrl else { return }
         guard let url = URL(string: profileImageUrl) else { return }
-                   
+        
         URLSession.shared.dataTask(with: url) { (data, response, error) in
                        
         if let error = error {
