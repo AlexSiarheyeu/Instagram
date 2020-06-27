@@ -19,6 +19,7 @@ class MainTabBarController: UITabBarController {
         //if user is not logged in, present controller
         if Auth.auth().currentUser == nil {
             let navVC = UINavigationController(rootViewController: LoginController())
+            navVC.modalPresentationStyle = .fullScreen
             
             DispatchQueue.main.async {
                 self.present(navVC, animated: true)

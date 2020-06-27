@@ -11,6 +11,23 @@ import Firebase
 
 class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
 
+    //MARK: - View Controller lifecycle
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        view.backgroundColor = .white
+        view.addSubview(alreadyHaveAccountButton)
+        
+        view.addSubview(plusPhotoButton)
+        
+        setupInputTextFields()
+        
+        
+        NSLayoutConstraint.activate([
+            alreadyHaveAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
+            alreadyHaveAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+        ])
+     }
     //MARK: - Properties
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -68,6 +85,20 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
         
         button.addTarget(self, action: #selector(handleSignUp), for: .touchUpInside)
+        return button
+    }()
+
+    let alreadyHaveAccountButton: UIButton = {
+        let button = UIButton(type: .system)
+        
+        let attributedTitle = NSMutableAttributedString(string: "Already have an account?  ", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.lightGray])
+
+        attributedTitle.append(NSAttributedString(string: "Sign In", attributes: [NSAttributedString.Key.font : UIFont.boldSystemFont(ofSize: 16), NSAttributedString.Key.foregroundColor: UIColor.rgb(red: 17, green: 154, blue: 237)]))
+        
+        button.setAttributedTitle(attributedTitle, for: .normal)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(handleAlreadyHaveAccount), for: .touchUpInside)
         return button
     }()
     
@@ -152,6 +183,10 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         imagePickerController.allowsEditing = true
         present(imagePickerController, animated: true, completion: nil)
     }
+    
+    @objc func handleAlreadyHaveAccount() {
+        navigationController?.popViewController(animated: true)
+    }
 
     //MARK: - UIImagePickerControllerDelegate
 
@@ -175,17 +210,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         
     }
     
-    
-    //MARK: - View Controller lifecycle
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        view.backgroundColor = .white
-        
-        view.addSubview(plusPhotoButton)
-        
-        setupInputTextFields()
-     }
+
     //MARK: - Setup User Interface
     
     fileprivate func setupInputTextFields() {
