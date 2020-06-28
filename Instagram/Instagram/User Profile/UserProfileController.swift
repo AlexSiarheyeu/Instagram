@@ -30,7 +30,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         collectionView?.backgroundColor = .white
         
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerId")
-        fetchUser()
         
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
                 

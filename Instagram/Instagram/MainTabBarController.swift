@@ -9,13 +9,16 @@
 import UIKit
 import Firebase
 
-class MainTabBarController: UITabBarController {
+class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
+
     //MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.delegate = self
+        
         //if user is not logged in, present controller
         if Auth.auth().currentUser == nil {
 
@@ -31,6 +34,7 @@ class MainTabBarController: UITabBarController {
         setupViewControllers()
     }
     
+    //MARK: - Private methods
     func setupViewControllers() {
         //home icon
         let homeNavController = templateNavController(unselectedImage: UIImage(named: "home_unselected"), selectedImage: UIImage(named:"home_selected"))
@@ -72,6 +76,22 @@ class MainTabBarController: UITabBarController {
         navController.tabBarItem.image = unselectedImage
         navController.tabBarItem.selectedImage = selectedImage
         return navController
+    }
+    
+    //MARK: - UITabBarControllerDelegate
+    
+    func tabBarController(_ tabBarController: UITabBarController, shouldSelect viewController: UIViewController) -> Bool {
         
+        let index = viewControllers?.firstIndex(of: viewController)
+        
+        if index == 2 {
+            let layout = UICollectionViewFlowLayout()
+            let addPhotoController = PhotoSelectorController(collectionViewLayout: layout)
+            let navController = UINavigationController(rootViewController: addPhotoController)
+            navController.modalPresentationStyle = .fullScreen
+            self.present(navController, animated: true, completion: nil)
+        }
+        
+        return true
     }
 }

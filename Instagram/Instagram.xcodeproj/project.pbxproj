@@ -14,6 +14,8 @@
 		BC718EAE24A11BC9000FA97A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC718EAC24A11BC9000FA97A /* LaunchScreen.storyboard */; };
 		BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */; };
 		BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */; };
+		BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */; };
+		BC88374D24A916B0009C0058 /* PhotoSelectionHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374C24A916B0009C0058 /* PhotoSelectionHeader.swift */; };
 		BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */; };
 		BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9DEB924A21C5C00F4AB91 /* Extensions.swift */; };
 		BCE9DEBC24A2230900F4AB91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */; };
@@ -34,6 +36,8 @@
 		BC718EAF24A11BC9000FA97A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
+		BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
+		BC88374C24A916B0009C0058 /* PhotoSelectionHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectionHeader.swift; sourceTree = "<group>"; };
 		BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		BCE9DEB924A21C5C00F4AB91 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -90,9 +94,10 @@
 		BC718EA024A11BC4000FA97A /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				BC88374924A90380009C0058 /* Add Photo */,
 				BCF44B9224A765C400B13B05 /* Login */,
 				BCE9DEB824A21C3200F4AB91 /* Extensions */,
-				BCB7716924A3BFED00A2B702 /* UserProfile */,
+				BCB7716924A3BFED00A2B702 /* User Profile */,
 				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
 				BC718EA124A11BC4000FA97A /* AppDelegate.swift */,
 				BC718EA724A11BC4000FA97A /* Main.storyboard */,
@@ -104,13 +109,22 @@
 			path = Instagram;
 			sourceTree = "<group>";
 		};
-		BCB7716924A3BFED00A2B702 /* UserProfile */ = {
+		BC88374924A90380009C0058 /* Add Photo */ = {
+			isa = PBXGroup;
+			children = (
+				BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */,
+				BC88374C24A916B0009C0058 /* PhotoSelectionHeader.swift */,
+			);
+			path = "Add Photo";
+			sourceTree = "<group>";
+		};
+		BCB7716924A3BFED00A2B702 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
 				BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */,
 				BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */,
 			);
-			path = UserProfile;
+			path = "User Profile";
 			sourceTree = "<group>";
 		};
 		BCE9DEB824A21C3200F4AB91 /* Extensions */ = {
@@ -248,7 +262,9 @@
 			files = (
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
 				BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */,
+				BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */,
 				BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */,
+				BC88374D24A916B0009C0058 /* PhotoSelectionHeader.swift in Sources */,
 				BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */,
 				BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */,
 				BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */,
