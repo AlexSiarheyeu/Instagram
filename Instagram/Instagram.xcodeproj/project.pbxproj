@@ -18,6 +18,7 @@
 		BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */; };
 		BC88374D24A916B0009C0058 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374C24A916B0009C0058 /* PhotoSelectorCell.swift */; };
 		BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */; };
+		BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */; };
 		BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9DEB924A21C5C00F4AB91 /* Extensions.swift */; };
 		BCE9DEBC24A2230900F4AB91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */; };
 		BCF44B9424A765DC00B13B05 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF44B9324A765DC00B13B05 /* LoginController.swift */; };
@@ -41,6 +42,7 @@
 		BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		BC88374C24A916B0009C0058 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
 		BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
+		BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		BCE9DEB924A21C5C00F4AB91 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCF44B9324A765DC00B13B05 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -96,6 +98,7 @@
 		BC718EA024A11BC4000FA97A /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				BCBAC93624AB9EC4007E86DD /* Share Photo */,
 				BC88374924A90380009C0058 /* Add Photo */,
 				BCF44B9224A765C400B13B05 /* Login */,
 				BCE9DEB824A21C3200F4AB91 /* Extensions */,
@@ -128,6 +131,14 @@
 				BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */,
 			);
 			path = "User Profile";
+			sourceTree = "<group>";
+		};
+		BCBAC93624AB9EC4007E86DD /* Share Photo */ = {
+			isa = PBXGroup;
+			children = (
+				BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */,
+			);
+			path = "Share Photo";
 			sourceTree = "<group>";
 		};
 		BCE9DEB824A21C3200F4AB91 /* Extensions */ = {
@@ -263,6 +274,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */,
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
 				BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */,
 				BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */,
@@ -420,6 +432,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5WFMH6Q63;
 				INFOPLIST_FILE = Instagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -439,6 +452,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5WFMH6Q63;
 				INFOPLIST_FILE = Instagram/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
