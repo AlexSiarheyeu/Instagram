@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Firebase
 
 class SharePhotoController: UIViewController {
     
+    //MARK: - Properties
+
     var selectedImage: UIImage? {
         didSet {
             self.imageView.image = selectedImage
@@ -47,11 +50,68 @@ class SharePhotoController: UIViewController {
     
     @objc func handleShare() {
         
-    }
+        guard let image = selectedImage else {
+            return
+        }
+        
+        guard let uploadData = image.jpegData(compressionQuality: 0.5) else { return }
+        
+        navigationItem.rightBarButtonItem?.isEnabled = false
+        
+        let filename = NSUUID().uuidString
     
+        let metaData = StorageMetadata()
+        
+        Storage.storage().reference().child("posts").child(filename).putData(uploadData, metadata: metaData) { (metadata, error) in
+           
+            if error == nil, metadata == nil {
+                
+                Storage.storage().reference().child("posts").downloadURL { (url, error) in
+                    
+                    guard let url = url?.absoluteString else {return}
+
+                }
+                
+
+            }
+        
+            print ("ok")
+       }
+    }
+                
     //MARK: Private methods
     
-    fileprivate func setupImageAndTextViews() {
+     func saveToDatabaseWithImageUrl(imageUrl: String) {
+        
+        guard let postImage = selectedImage else { return }
+        guard let caption = textView.text else { return }
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        let userPostRef = Database.database().reference().child("posts").child(uid)
+        let ref = userPostRef.childByAutoId()
+        let values = ["imageUrl": imageUrl,
+                      "caption": caption,
+                      "imageWidth": postImage.size.width,
+                      "imageHeight": postImage.size.height,
+                      "creationDate": Date().timeIntervalSince1970] as [String : Any]
+        
+        ref.updateChildValues(values) { (error, ref) in
+            
+            if let error = error {
+                self.navigationItem.rightBarButtonItem?.isEnabled = true
+                print("Failed to save post to DB \(error)")
+                return
+            }
+            
+            print("save to DB")
+            self.dismiss(animated: true)
+
+        }
+        
+    }
+
+    
+     func setupImageAndTextViews() {
         
         let containerView = UIView()
         containerView.backgroundColor = .white
@@ -80,3 +140,4 @@ class SharePhotoController: UIViewController {
         
     }
 }
+

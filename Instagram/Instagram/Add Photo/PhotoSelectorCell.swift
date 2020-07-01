@@ -10,7 +10,8 @@ import UIKit
 
 class PhotoSelectorCell: UICollectionViewCell {
     
-    
+    //MARK: - Properties
+
     let photoImageView: UIImageView = {
         let iv = UIImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false

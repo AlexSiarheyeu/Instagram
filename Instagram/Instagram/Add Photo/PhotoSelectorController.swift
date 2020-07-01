@@ -11,6 +11,8 @@ import Photos
 
 class PhotoSelectorController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    //MARK: - Properties
+
     let cellId = "cellId"
     let headerId = "headerId"
 
@@ -55,7 +57,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         let allPhotos = PHAsset.fetchAssets(with: .image, options: assetsFetchOptions())
         allPhotos.enumerateObjects { (asset, count, stop) in
             
-            DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .default).async {
                 
                 let imageManager = PHImageManager.default()
                 let targerSize = CGSize(width: 200, height: 200)

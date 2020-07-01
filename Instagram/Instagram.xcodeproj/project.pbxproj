@@ -98,16 +98,13 @@
 		BC718EA024A11BC4000FA97A /* Instagram */ = {
 			isa = PBXGroup;
 			children = (
+				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
 				BCBAC93624AB9EC4007E86DD /* Share Photo */,
 				BC88374924A90380009C0058 /* Add Photo */,
 				BCF44B9224A765C400B13B05 /* Login */,
-				BCE9DEB824A21C3200F4AB91 /* Extensions */,
 				BCB7716924A3BFED00A2B702 /* User Profile */,
-				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
-				BC718EA124A11BC4000FA97A /* AppDelegate.swift */,
-				BC718EA724A11BC4000FA97A /* Main.storyboard */,
-				BC718EAA24A11BC9000FA97A /* Assets.xcassets */,
-				BC718EAC24A11BC9000FA97A /* LaunchScreen.storyboard */,
+				BCE9DEB824A21C3200F4AB91 /* Extensions */,
+				BCA5227D24ABD5D900FD4319 /* Support Files */,
 				BC718EAF24A11BC9000FA97A /* Info.plist */,
 				BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */,
 			);
@@ -122,6 +119,17 @@
 				BC88374C24A916B0009C0058 /* PhotoSelectorCell.swift */,
 			);
 			path = "Add Photo";
+			sourceTree = "<group>";
+		};
+		BCA5227D24ABD5D900FD4319 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				BC718EA124A11BC4000FA97A /* AppDelegate.swift */,
+				BC718EA724A11BC4000FA97A /* Main.storyboard */,
+				BC718EAA24A11BC9000FA97A /* Assets.xcassets */,
+				BC718EAC24A11BC9000FA97A /* LaunchScreen.storyboard */,
+			);
+			path = "Support Files";
 			sourceTree = "<group>";
 		};
 		BCB7716924A3BFED00A2B702 /* User Profile */ = {

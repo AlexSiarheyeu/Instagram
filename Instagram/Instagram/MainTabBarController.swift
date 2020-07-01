@@ -36,6 +36,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
     
     //MARK: - Private methods
     func setupViewControllers() {
+        
         //home icon
         let homeNavController = templateNavController(unselectedImage: UIImage(named: "home_unselected"), selectedImage: UIImage(named:"home_selected"))
         

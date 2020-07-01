@@ -29,6 +29,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
         ])
      }
     //MARK: - Properties
+    
     let plusPhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(named: "plus_photo")?.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -144,9 +145,9 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
             guard let photo = url?.absoluteString else { return }
                         
                   let usernameValues = ["username": username, "email": email, "photo": photo]
-                  let valuse = [uid: usernameValues]
+                  let values = [uid: usernameValues]
          
-         Database.database().reference().child("users").updateChildValues(valuse)
+         Database.database().reference().child("users").updateChildValues(values)
             { (error, ref) in
                 
             if let error = error {
