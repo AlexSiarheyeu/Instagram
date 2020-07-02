@@ -59,26 +59,28 @@ class SharePhotoController: UIViewController {
         navigationItem.rightBarButtonItem?.isEnabled = false
         
         let filename = NSUUID().uuidString
-    
-        let metaData = StorageMetadata()
-        
-        Storage.storage().reference().child("posts").child(filename).putData(uploadData, metadata: metaData) { (metadata, error) in
+            
+        Storage.storage().reference().child("posts").child(filename).putData(uploadData, metadata: nil) { (metadata, error) in
            
-            if error == nil, metadata == nil {
-                
-                Storage.storage().reference().child("posts").downloadURL { (url, error) in
-                    
-                    guard let url = url?.absoluteString else {return}
-
-                }
-                
-
+            if let error = error {
+                print(error)
+                return
             }
-        
-            print ("ok")
-       }
-    }
+            
+        Storage.storage().reference().child("posts").child(filename).downloadURL { (url, error) in
                 
+            if let error = error {
+                print(error)
+                return
+            }
+                    
+            guard let imageUrl = url?.absoluteString else { return }
+                    
+                self.saveToDatabaseWithImageUrl(imageUrl: imageUrl)
+            }
+         }
+      }
+
     //MARK: Private methods
     
      func saveToDatabaseWithImageUrl(imageUrl: String) {
@@ -102,12 +104,8 @@ class SharePhotoController: UIViewController {
                 print("Failed to save post to DB \(error)")
                 return
             }
-            
-            print("save to DB")
             self.dismiss(animated: true)
-
         }
-        
     }
 
     
