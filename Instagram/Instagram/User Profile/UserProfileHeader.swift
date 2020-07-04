@@ -15,13 +15,14 @@ class UserProfileHeader: UICollectionViewCell {
     
     var user: User? {
         didSet {
-            setupProfileImageView()
+            guard let imageUrl = self.user?.photoImageUrl else { return }
+            profileImageView.loadImage(urlString: imageUrl)
             usernameLabel.text = user?.username
         }
     }
     
-    let profileImageView: UIImageView = {
-        let image = UIImageView()
+    let profileImageView: CustomImageView = {
+        let image = CustomImageView()
         image.backgroundColor = .clear
         image.translatesAutoresizingMaskIntoConstraints = false
         return image
@@ -198,28 +199,6 @@ class UserProfileHeader: UICollectionViewCell {
             bottomDeviderView.widthAnchor.constraint(equalTo: self.widthAnchor),
             bottomDeviderView.heightAnchor.constraint(equalToConstant: 0.5)
         ])
-    }
-    
-    fileprivate func setupProfileImageView() {
-        
-        guard let profileImageUrl = user?.photoImageUrl else { return }
-        guard let url = URL(string: profileImageUrl) else { return }
-        
-        URLSession.shared.dataTask(with: url) { (data, response, error) in
-                       
-        if let error = error {
-            print ("Failed to fetch profile image,\(error)")
-            return
-        }
-            
-        guard let data = data else { return }
-              let image = UIImage(data: data)
-                
-        DispatchQueue.main.async {
-              self.profileImageView.image = image
-        }
-                
-        }.resume()
     }
 
     required init?(coder: NSCoder) {

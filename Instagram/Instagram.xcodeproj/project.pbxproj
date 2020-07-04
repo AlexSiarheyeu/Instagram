@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		BC0F30D924B0A97C009D809C /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30D824B0A97C009D809C /* CustomImageView.swift */; };
 		BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */; };
 		BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA124A11BC4000FA97A /* AppDelegate.swift */; };
 		BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA524A11BC4000FA97A /* SignUpController.swift */; };
@@ -17,6 +18,9 @@
 		BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */; };
 		BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */; };
 		BC88374D24A916B0009C0058 /* PhotoSelectorCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374C24A916B0009C0058 /* PhotoSelectorCell.swift */; };
+		BCA7929224AE7CAB00E6ED29 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7929124AE7CAB00E6ED29 /* User.swift */; };
+		BCA7929424AE7EFF00E6ED29 /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7929324AE7EFF00E6ED29 /* Post.swift */; };
+		BCA7929624AE829100E6ED29 /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7929524AE829100E6ED29 /* UserProfilePhotoCell.swift */; };
 		BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */; };
 		BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */; };
 		BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9DEB924A21C5C00F4AB91 /* Extensions.swift */; };
@@ -29,6 +33,7 @@
 		11BCB7AA2339215A7A7B8252 /* Pods-Instagram.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.debug.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.debug.xcconfig"; sourceTree = "<group>"; };
 		24E26443C82D4F4AA3D8EAEE /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		670EC885F52DF020563AF85F /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
+		BC0F30D824B0A97C009D809C /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		BC718E9E24A11BC4000FA97A /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC718EA124A11BC4000FA97A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -41,6 +46,9 @@
 		BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
 		BC88374C24A916B0009C0058 /* PhotoSelectorCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorCell.swift; sourceTree = "<group>"; };
+		BCA7929124AE7CAB00E6ED29 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		BCA7929324AE7EFF00E6ED29 /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		BCA7929524AE829100E6ED29 /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
 		BCE9DEB924A21C5C00F4AB91 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
@@ -99,6 +107,8 @@
 			isa = PBXGroup;
 			children = (
 				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
+				BC0F30D824B0A97C009D809C /* CustomImageView.swift */,
+				BCA7929024AE7C9200E6ED29 /* Models */,
 				BCBAC93624AB9EC4007E86DD /* Share Photo */,
 				BC88374924A90380009C0058 /* Add Photo */,
 				BCF44B9224A765C400B13B05 /* Login */,
@@ -132,11 +142,21 @@
 			path = "Support Files";
 			sourceTree = "<group>";
 		};
+		BCA7929024AE7C9200E6ED29 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				BCA7929124AE7CAB00E6ED29 /* User.swift */,
+				BCA7929324AE7EFF00E6ED29 /* Post.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		BCB7716924A3BFED00A2B702 /* User Profile */ = {
 			isa = PBXGroup;
 			children = (
 				BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */,
 				BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */,
+				BCA7929524AE829100E6ED29 /* UserProfilePhotoCell.swift */,
 			);
 			path = "User Profile";
 			sourceTree = "<group>";
@@ -284,12 +304,16 @@
 			files = (
 				BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */,
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
+				BCA7929624AE829100E6ED29 /* UserProfilePhotoCell.swift in Sources */,
 				BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */,
+				BC0F30D924B0A97C009D809C /* CustomImageView.swift in Sources */,
 				BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */,
+				BCA7929424AE7EFF00E6ED29 /* Post.swift in Sources */,
 				BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */,
 				BC88374D24A916B0009C0058 /* PhotoSelectorCell.swift in Sources */,
 				BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */,
 				BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */,
+				BCA7929224AE7CAB00E6ED29 /* User.swift in Sources */,
 				BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */,
 				BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */,
 				BCF44B9424A765DC00B13B05 /* LoginController.swift in Sources */,

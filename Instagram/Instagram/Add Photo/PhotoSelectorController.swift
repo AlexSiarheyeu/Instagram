@@ -40,7 +40,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     fileprivate func setupNavigationButtons() {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(hanleCancelButton))
-        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(hanleNextButton))
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Next", style: .plain, target: self, action: #selector(handleNextButton))
     }
     
     fileprivate func assetsFetchOptions() -> PHFetchOptions {
@@ -90,7 +90,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         dismiss(animated: true)
     }
 
-    @objc func hanleNextButton() {
+    @objc func handleNextButton() {
         
         let sharePhotoController = SharePhotoController()
         sharePhotoController.selectedImage = header?.photoImageView.image
@@ -142,7 +142,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! PhotoSelectorCell
         
-        cell.photoImageView.image = images[indexPath.item]
+        cell.photoImageView.image = images[indexPath.row]
         return cell
     }
     

@@ -9,19 +9,10 @@
 import UIKit
 import Firebase
 
-struct User {
-    let username: String
-    let photoImageUrl: String
-    
-    init(dictionary: [String: Any]) {
-        self.username = dictionary["username"] as? String ?? ""
-        self.photoImageUrl = dictionary["photo"] as? String ?? ""
-    }
-}
-
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     var user: User?
+    var posts = [Post]()
     
     //MARK: - View Controller Lifecycle
     
@@ -31,11 +22,12 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerId")
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: "cellId")
                 
         
         setupLogOutButton()
         fetchUser()
+        fetchOrderedPosts()
     }
     //MARK: - Action methods for selectors
 
@@ -70,6 +62,24 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     //MARK: - Private methods
     
+    fileprivate func fetchOrderedPosts() {
+        
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+              
+        let reference = Database.database().reference().child("posts").child(uid)
+        
+        reference.queryOrdered(byChild: "creationDate").observe(.childAdded, with: { (snapshot) in
+            
+            guard let dictionary = snapshot.value as? [String: Any] else { return }
+            let post = Post(dictionary: dictionary)
+            self.posts.append(post)
+            self.collectionView.reloadData()
+            
+        }) { (error) in
+            print("Failed to fetch post", error)
+        }
+    }
+    
     fileprivate func fetchUser() {
         
         guard let uid = Auth.auth().currentUser?.uid else { return }
@@ -82,6 +92,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             self.navigationItem.title = self.user?.username
             
             self.collectionView.reloadData()
+
             
         }) { (error) in
             print ("Failed to fetch user \(error)")
@@ -104,13 +115,17 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     }
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 7
+        return self.posts.count
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .black
+         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! UserProfilePhotoCell
+        
+        cell.posts = posts[indexPath.item]
+        
+
+        
             return cell
     }
     
