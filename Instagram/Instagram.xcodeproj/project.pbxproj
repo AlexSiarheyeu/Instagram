@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		BC0F30D924B0A97C009D809C /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30D824B0A97C009D809C /* CustomImageView.swift */; };
+		BC0F30DD24B0BA35009D809C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30DC24B0BA35009D809C /* HomeController.swift */; };
+		BC0F30DF24B0DF30009D809C /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30DE24B0DF30009D809C /* HomePostCell.swift */; };
 		BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */; };
 		BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA124A11BC4000FA97A /* AppDelegate.swift */; };
 		BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA524A11BC4000FA97A /* SignUpController.swift */; };
@@ -34,6 +36,8 @@
 		24E26443C82D4F4AA3D8EAEE /* Pods_Instagram.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Instagram.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		670EC885F52DF020563AF85F /* Pods-Instagram.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Instagram.release.xcconfig"; path = "Target Support Files/Pods-Instagram/Pods-Instagram.release.xcconfig"; sourceTree = "<group>"; };
 		BC0F30D824B0A97C009D809C /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		BC0F30DC24B0BA35009D809C /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		BC0F30DE24B0DF30009D809C /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		BC718E9E24A11BC4000FA97A /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC718EA124A11BC4000FA97A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -85,6 +89,23 @@
 			path = Pods;
 			sourceTree = "<group>";
 		};
+		BC0F30DA24B0B91D009D809C /* Downloader */ = {
+			isa = PBXGroup;
+			children = (
+				BC0F30D824B0A97C009D809C /* CustomImageView.swift */,
+			);
+			path = Downloader;
+			sourceTree = "<group>";
+		};
+		BC0F30DB24B0BA18009D809C /* Home */ = {
+			isa = PBXGroup;
+			children = (
+				BC0F30DC24B0BA35009D809C /* HomeController.swift */,
+				BC0F30DE24B0DF30009D809C /* HomePostCell.swift */,
+			);
+			path = Home;
+			sourceTree = "<group>";
+		};
 		BC718E9524A11BC4000FA97A = {
 			isa = PBXGroup;
 			children = (
@@ -107,8 +128,9 @@
 			isa = PBXGroup;
 			children = (
 				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
-				BC0F30D824B0A97C009D809C /* CustomImageView.swift */,
+				BC0F30DA24B0B91D009D809C /* Downloader */,
 				BCA7929024AE7C9200E6ED29 /* Models */,
+				BC0F30DB24B0BA18009D809C /* Home */,
 				BCBAC93624AB9EC4007E86DD /* Share Photo */,
 				BC88374924A90380009C0058 /* Add Photo */,
 				BCF44B9224A765C400B13B05 /* Login */,
@@ -303,6 +325,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */,
+				BC0F30DF24B0DF30009D809C /* HomePostCell.swift in Sources */,
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
 				BCA7929624AE829100E6ED29 /* UserProfilePhotoCell.swift in Sources */,
 				BCE9DEBA24A21C5C00F4AB91 /* Extensions.swift in Sources */,
@@ -314,6 +337,7 @@
 				BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */,
 				BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */,
 				BCA7929224AE7CAB00E6ED29 /* User.swift in Sources */,
+				BC0F30DD24B0BA35009D809C /* HomeController.swift in Sources */,
 				BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */,
 				BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */,
 				BCF44B9424A765DC00B13B05 /* LoginController.swift in Sources */,

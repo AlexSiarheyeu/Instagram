@@ -75,7 +75,7 @@ class SharePhotoController: UIViewController {
             }
                     
             guard let imageUrl = url?.absoluteString else { return }
-                    
+                  
                 self.saveToDatabaseWithImageUrl(imageUrl: imageUrl)
             }
          }
