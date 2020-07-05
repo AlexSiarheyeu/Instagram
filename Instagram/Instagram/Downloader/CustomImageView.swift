@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import Foundation
 
 var imageCache = [String: UIImage]()
 

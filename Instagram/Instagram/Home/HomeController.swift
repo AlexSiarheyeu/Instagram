@@ -37,7 +37,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: view.frame.width, height: view.frame.width)
+        
+        var height: CGFloat = 40 + 8 + 8 // how to 1 to 1 aspect ratio
+        height += view.frame.width
+        
+        return CGSize(width: view.frame.width, height: height)
     }
     
     
