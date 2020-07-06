@@ -53,29 +53,74 @@ class HomePostCell: UICollectionViewCell {
         return button
     }()
     
+    let likeButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "like_unselected")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let commentButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "comment")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let sendMessageButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "send2")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let bookmarkButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setImage(UIImage(named: "ribbon")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        return button
+    }()
+    
+    let captionLabel: UILabel = {
+        let label = UILabel()
+        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        
+        attributedText.append(NSAttributedString(string: " Nice photo and long capture that will perhaps wrap onto the next line...", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+        
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+        
+        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        
+        label.attributedText = attributedText
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.numberOfLines = 0
+        return label
+    }()
+    
+    var stackView = UIStackView()
+    
     @objc func handleOptionsButton() {
         print("kdsmjdks;")
     }
     
     override init(frame: CGRect) {
         super.init(frame: frame)
-        
-        backgroundColor = .gray
-        addSubview(photoImageView)
-        
+                
         addSubview(userProfileImageView)
         userProfileImageView.layer.cornerRadius = 40/2
 
         addSubview(usernameLabel)
-        
         addSubview(optionsButton)
+        addSubview(photoImageView)
+        addSubview(captionLabel)
+
+        setupActionButtons()
         
         NSLayoutConstraint.activate([
             
             photoImageView.widthAnchor.constraint(equalTo: self.widthAnchor),
             photoImageView.topAnchor.constraint(equalTo: userProfileImageView.bottomAnchor, constant: 8),
-            photoImageView.bottomAnchor.constraint(equalTo: self.bottomAnchor),
-            
+            photoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
             
             userProfileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             userProfileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
@@ -86,9 +131,42 @@ class HomePostCell: UICollectionViewCell {
             usernameLabel.centerYAnchor.constraint(equalTo: userProfileImageView.centerYAnchor),
             
             optionsButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
-            optionsButton.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor)
+            optionsButton.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor),
+            
+ 
+            captionLabel.topAnchor.constraint(equalTo: likeButton.bottomAnchor, constant:  10),
+            captionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            captionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
 
         ])
+    }
+    
+    fileprivate func setupActionButtons() {
+        self.stackView = UIStackView(arrangedSubviews: [likeButton, commentButton, sendMessageButton])
+        
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(stackView)
+        
+        stackView.spacing = 10
+        stackView.distribution = .fillEqually
+        
+        addSubview(bookmarkButton)
+        
+        NSLayoutConstraint.activate([
+            stackView.widthAnchor.constraint(equalToConstant: 120),
+            stackView.heightAnchor.constraint(equalToConstant: 50),
+
+            stackView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
+            stackView.topAnchor.constraint(equalTo: photoImageView.bottomAnchor, constant: 4),
+            
+            bookmarkButton.trailingAnchor.constraint(equalTo: self.trailingAnchor,constant: -10),
+            bookmarkButton.centerYAnchor.constraint(equalTo: stackView.centerYAnchor),
+            bookmarkButton.widthAnchor.constraint(equalToConstant: 40),
+                       bookmarkButton.heightAnchor.constraint(equalToConstant: 50),
+        ])
+        
+        
+        
     }
     
     required init?(coder: NSCoder) {
