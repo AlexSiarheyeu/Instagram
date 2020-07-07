@@ -56,31 +56,29 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     fileprivate func fetchPosts(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
-        Database.database().reference().child("users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
-            
-            guard let userDictionary = snapshot.value as? [String: Any] else { return }
-                      
-            let user = User(dictionary: userDictionary)
-            
-            let reference = Database.database().reference().child("posts").child(uid)
-            
-            reference.observeSingleEvent(of: .value, with: { (snapshot) in
-                
-            guard let dictionary = snapshot.value as? [String: Any] else { return }
+        Database.fetchUserWithUID(uid: uid) { (user) in
+            self.fetchPostsWifthUser(user: user)
+        }
+        
+    }
+    
+    fileprivate func fetchPostsWifthUser(user: User) {
 
-            dictionary.forEach { (key, value) in
-                guard let dict = value as? [String: Any] else { return }
-                let post = Post(user: user, dictionary: dict)
-                self.posts.append(post)
-            }
-                self.collectionView.reloadData()
-                
-            }) { (error) in
-                print("Failed to fetch photos", error)
-            }
+        let reference = Database.database().reference().child("posts").child(user.uid)
+        
+        reference.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+        guard let dictionary = snapshot.value as? [String: Any] else { return }
+
+        dictionary.forEach { (key, value) in
+            guard let dict = value as? [String: Any] else { return }
+            let post = Post(user: user, dictionary: dict)
+            self.posts.append(post)
+        }
+            self.collectionView.reloadData()
             
         }) { (error) in
-            print("Failed to fetch username", error)
+            print("Failed to fetch photos", error)
         }
     }
 }
