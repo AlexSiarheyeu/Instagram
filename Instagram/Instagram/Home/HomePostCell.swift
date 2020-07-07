@@ -12,17 +12,21 @@ class HomePostCell: UICollectionViewCell {
     
     var post: Post? {
         didSet {
-            
             guard let imageUrl = post?.imageUrl else { return }
+            guard let userImage = post?.user.photoImageUrl else { return }
             
             photoImageView.loadImage(urlString: imageUrl)
+            usernameLabel.text = post?.user.username
+            userProfileImageView.loadImage(urlString: userImage)
+            //captionLabel.text = post?.caption
+            setupAttributedCaption()
+            
         }
     }
     
     let userProfileImageView: CustomImageView = {
         let image = CustomImageView()
         image.translatesAutoresizingMaskIntoConstraints = false
-        image.backgroundColor = .red
         image.contentMode = .scaleAspectFill
         image.clipsToBounds = true
         return image
@@ -83,15 +87,6 @@ class HomePostCell: UICollectionViewCell {
     
     let captionLabel: UILabel = {
         let label = UILabel()
-        let attributedText = NSMutableAttributedString(string: "Username", attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
-        
-        attributedText.append(NSAttributedString(string: " Nice photo and long capture that will perhaps wrap onto the next line...", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
-        
-        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
-        
-        attributedText.append(NSAttributedString(string: "1 week ago", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
-        
-        label.attributedText = attributedText
         label.translatesAutoresizingMaskIntoConstraints = false
         label.numberOfLines = 0
         return label
@@ -140,6 +135,22 @@ class HomePostCell: UICollectionViewCell {
 
         ])
     }
+    
+    fileprivate func setupAttributedCaption() {
+        
+        guard let post = self.post else { return }
+        
+        let attributedText = NSMutableAttributedString(string: post.user.username, attributes: [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 14)])
+        
+        attributedText.append(NSAttributedString(string: " \(post.caption)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)]))
+               
+        attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
+               
+        attributedText.append(NSAttributedString(string: "1 w", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+               
+        captionLabel.attributedText = attributedText
+    }
+
     
     fileprivate func setupActionButtons() {
         self.stackView = UIStackView(arrangedSubviews: [likeButton, commentButton, sendMessageButton])

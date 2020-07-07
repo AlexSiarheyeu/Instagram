@@ -46,7 +46,6 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     fileprivate func assetsFetchOptions() -> PHFetchOptions {
         
         let fetchOptions = PHFetchOptions()
-        //fetchOptions.fetchLimit = 15
         let sortDescriptor = NSSortDescriptor(key: "creationDate", ascending: false)
         fetchOptions.sortDescriptors = [sortDescriptor]
         return fetchOptions
@@ -57,7 +56,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         let allPhotos = PHAsset.fetchAssets(with: .image, options: assetsFetchOptions())
         allPhotos.enumerateObjects { (asset, count, stop) in
             
-            DispatchQueue.global(qos: .default).async {
+            DispatchQueue.global(qos: .userInitiated).async {
                 
                 let imageManager = PHImageManager.default()
                 let targerSize = CGSize(width: 200, height: 200)
