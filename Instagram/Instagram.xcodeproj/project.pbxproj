@@ -10,7 +10,8 @@
 		BC0F30D924B0A97C009D809C /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30D824B0A97C009D809C /* CustomImageView.swift */; };
 		BC0F30DD24B0BA35009D809C /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30DC24B0BA35009D809C /* HomeController.swift */; };
 		BC0F30DF24B0DF30009D809C /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30DE24B0DF30009D809C /* HomePostCell.swift */; };
-		BC46BE5524B6357900D43620 /* SearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46BE5424B6357900D43620 /* SearchController.swift */; };
+		BC46BE5524B6357900D43620 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46BE5424B6357900D43620 /* UserSearchController.swift */; };
+		BC46BE5724B652C900D43620 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46BE5624B652C900D43620 /* UserSearchCell.swift */; };
 		BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */; };
 		BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA124A11BC4000FA97A /* AppDelegate.swift */; };
 		BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA524A11BC4000FA97A /* SignUpController.swift */; };
@@ -40,7 +41,8 @@
 		BC0F30D824B0A97C009D809C /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
 		BC0F30DC24B0BA35009D809C /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		BC0F30DE24B0DF30009D809C /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
-		BC46BE5424B6357900D43620 /* SearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchController.swift; sourceTree = "<group>"; };
+		BC46BE5424B6357900D43620 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
+		BC46BE5624B652C900D43620 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		BC718E9E24A11BC4000FA97A /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC718EA124A11BC4000FA97A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -110,12 +112,13 @@
 			path = Home;
 			sourceTree = "<group>";
 		};
-		BC46BE5324B6356600D43620 /* Search */ = {
+		BC46BE5324B6356600D43620 /* User Search */ = {
 			isa = PBXGroup;
 			children = (
-				BC46BE5424B6357900D43620 /* SearchController.swift */,
+				BC46BE5424B6357900D43620 /* UserSearchController.swift */,
+				BC46BE5624B652C900D43620 /* UserSearchCell.swift */,
 			);
-			path = Search;
+			path = "User Search";
 			sourceTree = "<group>";
 		};
 		BC718E9524A11BC4000FA97A = {
@@ -140,7 +143,7 @@
 			isa = PBXGroup;
 			children = (
 				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
-				BC46BE5324B6356600D43620 /* Search */,
+				BC46BE5324B6356600D43620 /* User Search */,
 				BC0F30DA24B0B91D009D809C /* Downloader */,
 				BCA7929024AE7C9200E6ED29 /* Models */,
 				BC0F30DB24B0BA18009D809C /* Home */,
@@ -338,9 +341,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BC46BE5724B652C900D43620 /* UserSearchCell.swift in Sources */,
 				BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */,
 				BC0F30DF24B0DF30009D809C /* HomePostCell.swift in Sources */,
-				BC46BE5524B6357900D43620 /* SearchController.swift in Sources */,
+				BC46BE5524B6357900D43620 /* UserSearchController.swift in Sources */,
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
 				BC8C42D024B4CCFB00013B0A /* Database + FetchUser.swift in Sources */,
 				BCA7929624AE829100E6ED29 /* UserProfilePhotoCell.swift in Sources */,

@@ -1,5 +1,5 @@
 //
-//  SearchController.swift
+//  UserSearchController.swift
 //  Instagram
 //
 //  Created by Alexey Sergeev on 7/8/20.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class UserSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     
     let searchBar: UISearchBar = {
@@ -33,12 +33,13 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
             searchBar.bottomAnchor.constraint(equalTo: navBar.bottomAnchor, constant: -8),
             ])
             
-            collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cellId")
+            collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: "cellId")
+        
+        collectionView.alwaysBounceVertical = true
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath)
-        cell.backgroundColor = .red
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! UserSearchCell
         return cell
     }
     
@@ -48,6 +49,6 @@ class SearchController: UICollectionViewController, UICollectionViewDelegateFlow
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = collectionView.frame.width
-        return CGSize(width: width, height: 50)
+        return CGSize(width: width, height: 66)
     }
 }
