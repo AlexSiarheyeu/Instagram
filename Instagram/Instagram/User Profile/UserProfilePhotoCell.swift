@@ -10,6 +10,8 @@ import UIKit
 
 class UserProfilePhotoCell: UICollectionViewCell {
     
+    //MARK: - Properties
+
     var posts: Post? {
         didSet {
 
@@ -48,6 +50,8 @@ class UserProfilePhotoCell: UICollectionViewCell {
         return photo
     }()
     
+    //MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
         

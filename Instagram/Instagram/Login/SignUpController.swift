@@ -15,19 +15,22 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         view.backgroundColor = .white
         view.addSubview(alreadyHaveAccountButton)
-        
         view.addSubview(plusPhotoButton)
         
         setupInputTextFields()
-        
         
         NSLayoutConstraint.activate([
             alreadyHaveAccountButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -24),
             alreadyHaveAccountButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
         ])
+        
+        //fileprivate methods call
+        setupInputTextFields()
      }
+    
     //MARK: - Properties
     
     let plusPhotoButton: UIButton = {
@@ -243,7 +246,6 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
            plusPhotoButton.heightAnchor.constraint(equalToConstant: 140),
            plusPhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
            plusPhotoButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 40),
-
         ])
     }
 }

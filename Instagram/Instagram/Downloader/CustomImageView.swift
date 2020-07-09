@@ -41,7 +41,7 @@ class CustomImageView: UIImageView {
 
             imageCache[url.absoluteString] = photoImage
 
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { 
                 self.image = photoImage
             }
 

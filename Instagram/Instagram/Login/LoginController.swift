@@ -11,7 +11,6 @@ import Firebase
 
 class LoginController: UIViewController {
     
-    
     //MARK: View Controller Lifecycle
      
      override func viewDidLoad() {
@@ -32,11 +31,13 @@ class LoginController: UIViewController {
              logoContainerView.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 1/4),
              logoContainerView.topAnchor.constraint(equalTo: view.topAnchor)
          ])
-         
+        
+         // fileprivate methods call
          setupUserLogInView()
      }
     
     //MARK: Properties
+    
     let emailTextField: UITextField = {
         let email = UITextField()
         email.placeholder = "Email"
@@ -109,6 +110,7 @@ class LoginController: UIViewController {
     }
         
     //MARK: Action methods for selectors
+    
     @objc func handleShowSignUp() {
         self.navigationController?.pushViewController(SignUpController(), animated: true)
     }
@@ -148,7 +150,8 @@ class LoginController: UIViewController {
     }
     //MARK: - Private methods
     
-    func setupUserLogInView() {
+    fileprivate func setupUserLogInView() {
+        
         let stackView = UIStackView(arrangedSubviews: [emailTextField, passwordTextField, logInButton])
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
@@ -157,7 +160,6 @@ class LoginController: UIViewController {
         view.addSubview(stackView)
         
         NSLayoutConstraint.activate([
-            
             stackView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 40),
             stackView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
             stackView.topAnchor.constraint(equalTo: logoContainerView.bottomAnchor, constant: 20),

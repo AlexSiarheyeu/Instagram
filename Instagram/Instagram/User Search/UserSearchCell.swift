@@ -10,6 +10,8 @@ import UIKit
 
 class UserSearchCell: UICollectionViewCell {
     
+    //MARK: - Properties
+
     var user: User? {
         didSet {
             
@@ -36,6 +38,8 @@ class UserSearchCell: UICollectionViewCell {
         return label
     }()
     
+    //MARK: - Initialization
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
          
@@ -43,6 +47,7 @@ class UserSearchCell: UICollectionViewCell {
         addSubview(usernameLabel)
         userImageView.layer.cornerRadius = 50/2
         
+        // setup constraints for the user Image View and usernameLabel
         NSLayoutConstraint.activate([
             userImageView.widthAnchor.constraint(equalToConstant: 50),
             userImageView.heightAnchor.constraint(equalToConstant: 50),
@@ -53,10 +58,13 @@ class UserSearchCell: UICollectionViewCell {
             usernameLabel.topAnchor.constraint(equalTo: userImageView.topAnchor, constant: 8)
         ])
         
+        // add lightGray separator view between cells
         let separatorView = UIView()
         separatorView.backgroundColor = UIColor(white: 0, alpha: 0.5)
         separatorView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(separatorView)
+        
+        // constraints fot the separator view
         NSLayoutConstraint.activate([
             separatorView.leadingAnchor.constraint(equalTo: usernameLabel.leadingAnchor),
             separatorView.trailingAnchor.constraint(equalTo: trailingAnchor),

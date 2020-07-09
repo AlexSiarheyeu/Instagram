@@ -43,6 +43,7 @@ class SharePhotoController: UIViewController {
         
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Share", style: .plain, target: self, action: #selector(handleShare))
         
+        // fileprivate methods call
         setupImageAndTextViews()
     }
     
@@ -83,7 +84,7 @@ class SharePhotoController: UIViewController {
 
     //MARK: Private methods
     
-     func saveToDatabaseWithImageUrl(imageUrl: String) {
+     fileprivate func saveToDatabaseWithImageUrl(imageUrl: String) {
         
         guard let postImage = selectedImage else { return }
         guard let caption = textView.text else { return }
@@ -109,7 +110,7 @@ class SharePhotoController: UIViewController {
     }
 
     
-     func setupImageAndTextViews() {
+     fileprivate func setupImageAndTextViews() {
         
         let containerView = UIView()
         containerView.backgroundColor = .white
@@ -135,7 +136,6 @@ class SharePhotoController: UIViewController {
             textView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor,constant: -10),
             textView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -10)
         ])
-        
     }
 }
 

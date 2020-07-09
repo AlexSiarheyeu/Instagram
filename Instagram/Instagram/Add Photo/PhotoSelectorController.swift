@@ -30,6 +30,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
         
         collectionView.register(PhotoSelectorHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: headerId)
         
+        //fileprivate methods call
         setupNavigationButtons()
         fetchPhotos()
     }
@@ -37,6 +38,7 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     override var prefersStatusBarHidden: Bool { true }
     
     //MARK: - Private methods
+    
     fileprivate func setupNavigationButtons() {
         navigationController?.navigationBar.tintColor = .black
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Cancel", style: .plain, target: self, action: #selector(hanleCancelButton))
@@ -156,7 +158,6 @@ class PhotoSelectorController: UICollectionViewController, UICollectionViewDeleg
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
-    //MARK: - Collection view flow layout delegate
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (view.frame.width - 3)/4

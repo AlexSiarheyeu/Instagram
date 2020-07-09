@@ -135,6 +135,7 @@ class UserProfileHeader: UICollectionViewCell {
             usernameLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 16)
         ])
 
+        //fileprivate methods call
         setupBottomToolBar()
         setupUserStatsView()
     }
@@ -160,8 +161,6 @@ class UserProfileHeader: UICollectionViewCell {
             editProfileButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 4),
             editProfileButton.leadingAnchor.constraint(equalTo: postsLabel.leadingAnchor),
             editProfileButton.trailingAnchor.constraint(equalTo: followingLabel.trailingAnchor),
-
-            
             editProfileButton.heightAnchor.constraint(equalToConstant: 34)
         ])
     }

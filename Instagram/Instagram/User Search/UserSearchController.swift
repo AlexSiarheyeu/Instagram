@@ -11,6 +11,8 @@ import Firebase
 
 class UserSearchController: UICollectionViewController, UICollectionViewDelegateFlowLayout, UISearchBarDelegate {
     
+    //MARK: - Properties
+
    lazy var searchBar: UISearchBar = {
         let bar = UISearchBar()
         bar.placeholder = "Enter search text"
@@ -19,14 +21,24 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
         return bar
     }()
     
+    var filteredUsers = [User]()
+    var users = [User]()
+    
+    //MARK: - View Controller Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //collection view settings
         collectionView.backgroundColor = .white
+        collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: "cellId")
+        collectionView.alwaysBounceVertical = true
+        collectionView.keyboardDismissMode = .onDrag
         
+        //setup constraints for the Search Bar
         guard let navBar = navigationController?.navigationBar else { return }
-        
         navigationController?.navigationBar.addSubview(searchBar)
+        
         NSLayoutConstraint.activate([
             searchBar.leadingAnchor.constraint(equalTo: navBar.leadingAnchor, constant: 8),
             searchBar.trailingAnchor.constraint(equalTo: navBar.trailingAnchor, constant: -8),
@@ -34,23 +46,31 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
             searchBar.bottomAnchor.constraint(equalTo: navBar.bottomAnchor, constant: -8),
             ])
             
-        collectionView.register(UserSearchCell.self, forCellWithReuseIdentifier: "cellId")
-        
-        collectionView.alwaysBounceVertical = true
-        
+        //fileprivate methods call
         fetchUsers()
     }
     
-    var filteredUsers = [User]()
-    var users = [User]()
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        searchBar.isHidden = false
+    }
+    
+   //MARK: - Private methods
+    
     fileprivate func fetchUsers() {
-            let ref = Database.database().reference().child("users")
+        let ref = Database.database().reference().child("users")
         
         ref.observeSingleEvent(of: .value) { (snapshot) in
             
         guard let dictionaries = snapshot.value as? [String: Any] else { return }
             
             dictionaries.forEach { (key, value) in
+                
+                if key == Auth.auth().currentUser?.uid {
+                    return
+                }
+                
                 guard let userDict = value as? [String: Any] else { return }
                 let user = User(uid: key, dictionary: userDict)
                 self.users.append(user)
@@ -64,6 +84,8 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
             self.collectionView.reloadData()
         }
     }
+    
+    //MARK: - Setup collection view
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! UserSearchCell
@@ -89,7 +111,20 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
                 return user.username.lowercased().contains(searchText.lowercased())
           }
         }
-       
         self.collectionView.reloadData()
     }
+    
+    //MARK: - Search bar delegate
+    
+     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+         
+         searchBar.isHidden = true
+         searchBar.resignFirstResponder()
+
+         let user = filteredUsers[indexPath.row]
+         
+         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+         userProfileController.userId = user.uid
+         navigationController?.pushViewController(userProfileController, animated: true)
+     }
 }

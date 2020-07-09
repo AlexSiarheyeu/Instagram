@@ -10,6 +10,8 @@ import UIKit
 
 class HomePostCell: UICollectionViewCell {
     
+    //MARK: - Properties
+
     var post: Post? {
         didSet {
             guard let imageUrl = post?.imageUrl else { return }
@@ -51,8 +53,6 @@ class HomePostCell: UICollectionViewCell {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "ellipsis")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
-        
-        button.addTarget(self, action: #selector(handleOptionsButton), for: .touchUpInside)
         return button
     }()
     
@@ -93,48 +93,53 @@ class HomePostCell: UICollectionViewCell {
     
     var stackView = UIStackView()
     
-    @objc func handleOptionsButton() {
-        print("kdsmjdks;")
-    }
-    
+    //MARK: - Initialization
+
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
         addSubview(userProfileImageView)
-        userProfileImageView.layer.cornerRadius = 40/2
-
         addSubview(usernameLabel)
         addSubview(optionsButton)
         addSubview(photoImageView)
         addSubview(captionLabel)
+        userProfileImageView.layer.cornerRadius = 40/2
 
-        setupActionButtons()
-        
+        // setup constraints
         NSLayoutConstraint.activate([
             
+            // setup constraints for photoImageView
             photoImageView.widthAnchor.constraint(equalTo: self.widthAnchor),
             photoImageView.topAnchor.constraint(equalTo: userProfileImageView.bottomAnchor, constant: 8),
             photoImageView.heightAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
             
+            // setup constraints for userProfileImageView
             userProfileImageView.topAnchor.constraint(equalTo: self.topAnchor, constant: 8),
             userProfileImageView.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             userProfileImageView.widthAnchor.constraint(equalToConstant: 40),
             userProfileImageView.heightAnchor.constraint(equalToConstant: 40),
             
+            // setup constraints for usernameLabel
             usernameLabel.leadingAnchor.constraint(equalTo: userProfileImageView.trailingAnchor, constant: 8),
             usernameLabel.centerYAnchor.constraint(equalTo: userProfileImageView.centerYAnchor),
             
+            // setup constraints for optionsButton
             optionsButton.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8),
             optionsButton.centerYAnchor.constraint(equalTo: usernameLabel.centerYAnchor),
             
- 
+            //setup constraints for captionLabel
             captionLabel.topAnchor.constraint(equalTo: likeButton.bottomAnchor, constant:  10),
             captionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             captionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
-
         ])
+        
+        // fileprivate methods call
+        setupActionButtons()
+
     }
     
+    //MARK: - Private methods
+
     fileprivate func setupAttributedCaption() {
         
         guard let post = self.post else { return }
@@ -174,14 +179,9 @@ class HomePostCell: UICollectionViewCell {
             bookmarkButton.widthAnchor.constraint(equalToConstant: 40),
                        bookmarkButton.heightAnchor.constraint(equalToConstant: 50),
         ])
-        
-        
-        
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-    
-   
 }

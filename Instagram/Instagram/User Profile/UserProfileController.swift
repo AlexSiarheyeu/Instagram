@@ -11,23 +11,24 @@ import Firebase
 
 class UserProfileController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    //MARK: - Properties
+
     var user: User?
     var posts = [Post]()
+    var userId: String?
     
     //MARK: - View Controller Lifecycle
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         collectionView?.backgroundColor = .white
-        
         collectionView.register(UserProfileHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "headerId")
-        
         collectionView.register(UserProfilePhotoCell.self, forCellWithReuseIdentifier: "cellId")
                 
-        
+        //fileprivate methods call
         setupLogOutButton()
         fetchUser()
-        fetchOrderedPosts()
     }
     //MARK: - Action methods for selectors
 
@@ -47,7 +48,6 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
             } catch let signOutError  {
                 print("\(signOutError)")
             }
-            
         }
         
         let actionCancel = UIAlertAction(title: "Cancel", style: .cancel) { (_) in
@@ -64,7 +64,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     fileprivate func fetchOrderedPosts() {
         
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let uid = user?.uid else { return }
               
         let reference = Database.database().reference().child("posts").child(uid)
         
@@ -85,13 +85,15 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     
     fileprivate func fetchUser() {
         
-        guard let uid = Auth.auth().currentUser?.uid else { return }
+        let uid = userId ?? (Auth.auth().currentUser?.uid ?? "")
         
         Database.fetchUserWithUID(uid: uid) { (user) in
             self.user = user
             self.navigationItem.title = self.user?.username
             
             self.collectionView.reloadData()
+            
+            self.fetchOrderedPosts()
         }
     }
     
@@ -100,7 +102,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         navigationItem.rightBarButtonItem = UIBarButtonItem(image: image, style: .plain, target: self, action: #selector(handleLogOut))
     }
     
-    //MARK: - UICollectionViewDataSource
+    //MARK: - Setup collection view header
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
@@ -110,6 +112,8 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
         return header
     }
     
+    //MARK: - Setup collection view
+
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return self.posts.count
     }
@@ -117,18 +121,16 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
          let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cellId", for: indexPath) as! UserProfilePhotoCell
-        
         cell.posts = posts[indexPath.item]
-        
 
-        
-            return cell
+        return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let width = (view.frame.width - 2) / 3
         return CGSize(width: width, height: width)
     }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
@@ -136,6 +138,7 @@ class UserProfileController: UICollectionViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 1
     }
+    
     //MARK: - UICollectionViewDelegateFlowLayout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {

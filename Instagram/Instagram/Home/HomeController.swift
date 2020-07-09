@@ -11,20 +11,25 @@ import Firebase
 
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
+    //MARK: - Properties
+
     let cellId = "cellId"
     var posts = [Post]()
     
+    
+    //MARK: - View Controller Lifecycle
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: cellId)
         
+        collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .white
         
         setupNaviagationItems()
         fetchPosts()
     }
     
-    //MARK: - setup collection view
+    //MARK: - Setup collection view
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return posts.count
