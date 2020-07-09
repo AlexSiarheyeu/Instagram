@@ -37,7 +37,6 @@ class CustomImageView: UIImageView {
             }
 
             guard let imageData = data else { return }
-
             let photoImage = UIImage(data: imageData)
 
             imageCache[url.absoluteString] = photoImage

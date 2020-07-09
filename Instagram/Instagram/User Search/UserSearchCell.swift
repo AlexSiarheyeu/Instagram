@@ -10,10 +10,19 @@ import UIKit
 
 class UserSearchCell: UICollectionViewCell {
     
+    var user: User? {
+        didSet {
+            
+            guard let userImage = user?.photoImageUrl else { return }
+            
+            usernameLabel.text = user?.username
+            userImageView.loadImage(urlString: userImage)
+        }
+    }
+    
     let userImageView: CustomImageView = {
         let iv = CustomImageView()
         iv.translatesAutoresizingMaskIntoConstraints = false
-        iv.backgroundColor = .yellow
         iv.contentMode = .scaleAspectFill
         iv.clipsToBounds = true
         return iv
