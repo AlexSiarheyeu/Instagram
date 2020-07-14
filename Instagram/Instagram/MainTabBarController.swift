@@ -41,7 +41,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         let homeNavController = templateNavController(unselectedImage: UIImage(named: "home_unselected"), selectedImage: UIImage(named:"home_selected"), rootViewController: HomeController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         //search icon
-        let searchNavController = templateNavController(unselectedImage: UIImage(named: "search_unselected"), selectedImage: UIImage(named: "search_selected"), rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
+        let searchController = templateNavController(unselectedImage: UIImage(named: "search_unselected"), selectedImage: UIImage(named: "search_selected")) //rootViewController: UserSearchController(collectionViewLayout: UICollectionViewFlowLayout()))
         
         //add post icon
         let addPosthNavController = templateNavController(unselectedImage: UIImage(named: "plus_unselected"), selectedImage: UIImage(named: "plus_unselected"))
@@ -59,7 +59,7 @@ class MainTabBarController: UITabBarController, UITabBarControllerDelegate {
         
 
         tabBar.tintColor = .black
-        viewControllers = [homeNavController, searchNavController, addPosthNavController, likehNavController, userProfileNavController]
+        viewControllers = [homeNavController, searchController, addPosthNavController, likehNavController, userProfileNavController]
         
         //modify tab bar item insets
         guard let items = tabBar.items else { return }

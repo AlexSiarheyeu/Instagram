@@ -98,12 +98,17 @@ class HomePostCell: UICollectionViewCell {
     override init(frame: CGRect) {
         super.init(frame: frame)
                 
+        
         addSubview(userProfileImageView)
+        userProfileImageView.layer.cornerRadius = 40/2
+
         addSubview(usernameLabel)
         addSubview(optionsButton)
         addSubview(photoImageView)
         addSubview(captionLabel)
-        userProfileImageView.layer.cornerRadius = 40/2
+        
+        // fileprivate methods call
+        setupActionButtons()
 
         // setup constraints
         NSLayoutConstraint.activate([
@@ -132,10 +137,6 @@ class HomePostCell: UICollectionViewCell {
             captionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             captionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
         ])
-        
-        // fileprivate methods call
-        setupActionButtons()
-
     }
     
     //MARK: - Private methods

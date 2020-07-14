@@ -52,7 +52,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         searchBar.isHidden = false
     }
     
@@ -60,28 +60,31 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     
     fileprivate func fetchUsers() {
         let ref = Database.database().reference().child("users")
-        
+
         ref.observeSingleEvent(of: .value) { (snapshot) in
-            
+
         guard let dictionaries = snapshot.value as? [String: Any] else { return }
-            
+
             dictionaries.forEach { (key, value) in
-                
+
                 if key == Auth.auth().currentUser?.uid {
                     return
                 }
-                
+
                 guard let userDict = value as? [String: Any] else { return }
                 let user = User(uid: key, dictionary: userDict)
                 self.users.append(user)
             }
-            
+
             self.users.sort { (user1, user2) -> Bool in
                 return user1.username.compare(user2.username) == .orderedAscending
             }
-            
+
             self.filteredUsers = self.users
-            self.collectionView.reloadData()
+            
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
@@ -103,7 +106,7 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        
+
         if searchText.isEmpty {
             filteredUsers = users
         } else {
@@ -118,13 +121,13 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     
      override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          
-         searchBar.isHidden = true
-         searchBar.resignFirstResponder()
-
-         let user = filteredUsers[indexPath.row]
-         
-         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-         userProfileController.userId = user.uid
-         navigationController?.pushViewController(userProfileController, animated: true)
+//         searchBar.isHidden = true
+//         searchBar.resignFirstResponder()
+//
+//         let user = filteredUsers[indexPath.row]
+//         
+//         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+//         userProfileController.userId = user.uid
+//         navigationController?.pushViewController(userProfileController, animated: true)
      }
 }

@@ -16,8 +16,10 @@ class UserProfileHeader: UICollectionViewCell {
     var user: User? {
         didSet {
             guard let imageUrl = self.user?.photoImageUrl else { return }
+            
             profileImageView.loadImage(urlString: imageUrl)
             usernameLabel.text = user?.username
+            setupEditFollowButton()
         }
     }
     
@@ -97,16 +99,18 @@ class UserProfileHeader: UICollectionViewCell {
         return following
     }()
     
-    let editProfileButton: UIButton = {
-        let edit = UIButton(type: .system)
-        edit.setTitle("Edit Profile", for: .normal)
-        edit.setTitleColor(.black, for: .normal)
-        edit.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
-        edit.layer.borderColor = UIColor.lightGray.cgColor
-        edit.layer.borderWidth = 1
-        edit.layer.cornerRadius = 3
-        edit.translatesAutoresizingMaskIntoConstraints = false
-        return edit
+    lazy var editProfileFollowButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setTitle("Edit Profile", for: .normal)
+        button.setTitleColor(.black, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 14)
+        button.layer.borderColor = UIColor.lightGray.cgColor
+        button.layer.borderWidth = 1
+        button.layer.cornerRadius = 3
+        button.translatesAutoresizingMaskIntoConstraints = false
+        
+        button.addTarget(self, action: #selector(handleEditProfileOrFollow), for: .touchUpInside)
+        return button
     }()
     
     //MARK: - Setup header view
@@ -116,7 +120,7 @@ class UserProfileHeader: UICollectionViewCell {
         
         addSubview(profileImageView)
         addSubview(usernameLabel)
-        addSubview(editProfileButton)
+        addSubview(editProfileFollowButton)
         
         //Constraints for Profile Image View
         NSLayoutConstraint.activate([
@@ -140,8 +144,70 @@ class UserProfileHeader: UICollectionViewCell {
         setupUserStatsView()
     }
     
+    //MARK: - Action methods for selectors
+ 
+  @objc func handleEditProfileOrFollow() {
+      
+      guard let currentLoggedInUserId =  Auth.auth().currentUser?.uid else { return }
+      guard let userId = user?.uid else { return }
+      
+    
+    if editProfileFollowButton.titleLabel?.text == "Unfollow" {
+        
+        //unfollow
+        Database.database().reference().child("following").child(currentLoggedInUserId).child(userId).removeValue { (error, reference) in
+            if let error = error {
+                print("Failed to unfollow user", error)
+                return
+            }
+            self.setupFollowStyle()
+        }
+    } else {
+        
+        //follow
+        let ref = Database.database().reference().child("following").child(currentLoggedInUserId)
+        
+        let values = [userId: 1]
+        ref.updateChildValues(values) { (error, reference) in
+            
+            if let error = error {
+                print("Failed to follow user", error)
+                return
+            }
+            
+            //successfully followed user
+            self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+            self.editProfileFollowButton.setTitleColor(.black, for: .normal)
+            self.editProfileFollowButton.backgroundColor = .white
+        }
+    }
+  }
+    
     //MARK: Private methods
     
+    
+    fileprivate func setupEditFollowButton() {
+        guard let currentLoggedInUserId = Auth.auth().currentUser?.uid else { return }
+        
+        guard let userId = user?.uid else { return }
+        
+        if currentLoggedInUserId == userId {
+            
+        } else {
+            
+            //check if following
+            
+            Database.database().reference().child("following").child(currentLoggedInUserId).child(userId).observeSingleEvent(of: .value) { (snapshot) in
+                
+                if let isFollowing = snapshot.value as? Int, isFollowing == 1 {
+                    self.editProfileFollowButton.setTitle("Unfollow", for: .normal)
+                } else {
+                    self.setupFollowStyle()
+                }
+            }
+        }
+    }
+
     fileprivate func setupUserStatsView() {
         let stackView = UIStackView(arrangedSubviews: [postsLabel, followersLabel, followingLabel])
         addSubview(stackView)
@@ -157,11 +223,11 @@ class UserProfileHeader: UICollectionViewCell {
         ])
         
         NSLayoutConstraint.activate([
-            editProfileButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
-            editProfileButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 4),
-            editProfileButton.leadingAnchor.constraint(equalTo: postsLabel.leadingAnchor),
-            editProfileButton.trailingAnchor.constraint(equalTo: followingLabel.trailingAnchor),
-            editProfileButton.heightAnchor.constraint(equalToConstant: 34)
+            editProfileFollowButton.widthAnchor.constraint(equalTo: stackView.widthAnchor),
+            editProfileFollowButton.topAnchor.constraint(equalTo: stackView.bottomAnchor, constant: 4),
+            editProfileFollowButton.leadingAnchor.constraint(equalTo: postsLabel.leadingAnchor),
+            editProfileFollowButton.trailingAnchor.constraint(equalTo: followingLabel.trailingAnchor),
+            editProfileFollowButton.heightAnchor.constraint(equalToConstant: 34)
         ])
     }
     
@@ -199,7 +265,15 @@ class UserProfileHeader: UICollectionViewCell {
             bottomDeviderView.heightAnchor.constraint(equalToConstant: 0.5)
         ])
     }
+    
+    fileprivate func setupFollowStyle() {
 
+        self.editProfileFollowButton.setTitle("Follow", for: .normal)
+        self.editProfileFollowButton.backgroundColor = UIColor.rgb(red: 17, green: 154, blue: 237)
+        self.editProfileFollowButton.setTitleColor(.white, for: .normal)
+        self.editProfileFollowButton.layer.borderColor = UIColor(white: 0, alpha: 0.2).cgColor
+    }
+    
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
