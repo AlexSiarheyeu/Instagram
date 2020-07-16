@@ -27,6 +27,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         setupNaviagationItems()
         fetchPosts()
+        fetchFollowingUsersId()
     }
     
     //MARK: - Setup collection view
@@ -54,6 +55,23 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     //MARK: - Private methods
     
+    
+    fileprivate func fetchFollowingUsersId() {
+        
+         guard let uid = Auth.auth().currentUser?.uid else { return }
+                
+         Database.database().reference().child("following").child(uid).observeSingleEvent(of: .value) { (snapshot) in
+  
+        guard let userIdsDictionary = snapshot.value as? [String: Any] else { return }
+            
+            userIdsDictionary.forEach { (key, value) in
+                Database.fetchUserWithUID(uid: key) { (user) in
+                    self.fetchPostsWithUser(user: user)
+          }
+        }
+      }
+    }
+    
     fileprivate func setupNaviagationItems() {
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
     }
@@ -62,12 +80,15 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
         Database.fetchUserWithUID(uid: uid) { (user) in
-            self.fetchPostsWifthUser(user: user)
+            self.fetchPostsWithUser(user: user)
         }
+        
+       
+        
         
     }
     
-    fileprivate func fetchPostsWifthUser(user: User) {
+    fileprivate func fetchPostsWithUser(user: User) {
 
         let reference = Database.database().reference().child("posts").child(user.uid)
         
@@ -80,6 +101,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             let post = Post(user: user, dictionary: dict)
             self.posts.append(post)
         }
+            
+            self.posts.sort { (p1, p2) -> Bool in
+                return p1.creationDate.compare(p2.creationDate) == .orderedDescending
+            }
+            
+            
             self.collectionView.reloadData()
             
         }) { (error) in

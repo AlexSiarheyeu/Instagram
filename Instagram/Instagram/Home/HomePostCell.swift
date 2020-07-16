@@ -151,7 +151,9 @@ class HomePostCell: UICollectionViewCell {
                
         attributedText.append(NSAttributedString(string: "\n\n", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 4)]))
                
-        attributedText.append(NSAttributedString(string: "1 w", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
+        
+        let timeAgoDispaly = post.creationDate.timeAgoDisplay()
+        attributedText.append(NSAttributedString(string: "\(timeAgoDispaly)", attributes: [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14), NSAttributedString.Key.foregroundColor: UIColor.gray]))
                
         captionLabel.attributedText = attributedText
     }

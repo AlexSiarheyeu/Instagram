@@ -12,6 +12,7 @@
 		BC0F30DF24B0DF30009D809C /* HomePostCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC0F30DE24B0DF30009D809C /* HomePostCell.swift */; };
 		BC46BE5524B6357900D43620 /* UserSearchController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46BE5424B6357900D43620 /* UserSearchController.swift */; };
 		BC46BE5724B652C900D43620 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46BE5624B652C900D43620 /* UserSearchCell.swift */; };
+		BC4D8DD224C0432600C131A8 /* Date+DisplayDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D8DD124C0432600C131A8 /* Date+DisplayDate.swift */; };
 		BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */; };
 		BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA124A11BC4000FA97A /* AppDelegate.swift */; };
 		BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA524A11BC4000FA97A /* SignUpController.swift */; };
@@ -43,6 +44,7 @@
 		BC0F30DE24B0DF30009D809C /* HomePostCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomePostCell.swift; sourceTree = "<group>"; };
 		BC46BE5424B6357900D43620 /* UserSearchController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchController.swift; sourceTree = "<group>"; };
 		BC46BE5624B652C900D43620 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
+		BC4D8DD124C0432600C131A8 /* Date+DisplayDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DisplayDate.swift"; sourceTree = "<group>"; };
 		BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
 		BC718E9E24A11BC4000FA97A /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC718EA124A11BC4000FA97A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -212,6 +214,7 @@
 			children = (
 				BCE9DEB924A21C5C00F4AB91 /* UIColor + RGB.swift */,
 				BC8C42CF24B4CCFB00013B0A /* Database + FetchUser.swift */,
+				BC4D8DD124C0432600C131A8 /* Date+DisplayDate.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -352,6 +355,7 @@
 				BC0F30D924B0A97C009D809C /* CustomImageView.swift in Sources */,
 				BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */,
 				BCA7929424AE7EFF00E6ED29 /* Post.swift in Sources */,
+				BC4D8DD224C0432600C131A8 /* Date+DisplayDate.swift in Sources */,
 				BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */,
 				BC88374D24A916B0009C0058 /* PhotoSelectorCell.swift in Sources */,
 				BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */,

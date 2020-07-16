@@ -121,13 +121,13 @@ class UserSearchController: UICollectionViewController, UICollectionViewDelegate
     
      override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
          
-//         searchBar.isHidden = true
-//         searchBar.resignFirstResponder()
-//
-//         let user = filteredUsers[indexPath.row]
-//         
-//         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
-//         userProfileController.userId = user.uid
-//         navigationController?.pushViewController(userProfileController, animated: true)
+         searchBar.isHidden = true
+         searchBar.resignFirstResponder()
+
+         let user = filteredUsers[indexPath.row]
+         
+         let userProfileController = UserProfileController(collectionViewLayout: UICollectionViewFlowLayout())
+         userProfileController.userId = user.uid
+         present(userProfileController, animated: true)
      }
 }
