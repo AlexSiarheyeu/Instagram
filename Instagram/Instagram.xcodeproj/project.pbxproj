@@ -149,7 +149,6 @@
 				BC0F30DA24B0B91D009D809C /* Downloader */,
 				BCA7929024AE7C9200E6ED29 /* Models */,
 				BC0F30DB24B0BA18009D809C /* Home */,
-				BCBAC93624AB9EC4007E86DD /* Share Photo */,
 				BC88374924A90380009C0058 /* Add Photo */,
 				BCF44B9224A765C400B13B05 /* Login */,
 				BCB7716924A3BFED00A2B702 /* User Profile */,
@@ -167,6 +166,7 @@
 				BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */,
 				BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */,
 				BC88374C24A916B0009C0058 /* PhotoSelectorCell.swift */,
+				BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */,
 			);
 			path = "Add Photo";
 			sourceTree = "<group>";
@@ -199,14 +199,6 @@
 				BCA7929524AE829100E6ED29 /* UserProfilePhotoCell.swift */,
 			);
 			path = "User Profile";
-			sourceTree = "<group>";
-		};
-		BCBAC93624AB9EC4007E86DD /* Share Photo */ = {
-			isa = PBXGroup;
-			children = (
-				BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */,
-			);
-			path = "Share Photo";
 			sourceTree = "<group>";
 		};
 		BCE9DEB824A21C3200F4AB91 /* Extensions */ = {

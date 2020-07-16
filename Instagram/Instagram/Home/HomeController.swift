@@ -22,12 +22,19 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        NotificationCenter.default.addObserver(self, selector: #selector(handleUpdateFeed), name: SharePhotoController.updateFeedNotificationName, object: nil)
+        
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .white
         
+        
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
+        collectionView.refreshControl = refreshControl
+        
+        
         setupNaviagationItems()
-        fetchPosts()
-        fetchFollowingUsersId()
+        fetchAllPosts()
     }
     
     //MARK: - Setup collection view
@@ -52,9 +59,23 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         return CGSize(width: view.frame.width, height: height)
     }
     
+    //MARK: - Action methods for selectors
     
+    @objc func handleRefresh() {
+        //posts.removeAll()
+        fetchAllPosts()
+        collectionView.refreshControl?.endRefreshing() //??
+    }
+    
+    @objc func handleUpdateFeed() {
+        handleRefresh()
+    }
     //MARK: - Private methods
     
+    fileprivate func fetchAllPosts() {
+        fetchPosts()
+        fetchFollowingUsersId()
+    }
     
     fileprivate func fetchFollowingUsersId() {
         
@@ -82,10 +103,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         Database.fetchUserWithUID(uid: uid) { (user) in
             self.fetchPostsWithUser(user: user)
         }
-        
-       
-        
-        
     }
     
     fileprivate func fetchPostsWithUser(user: User) {
@@ -93,6 +110,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let reference = Database.database().reference().child("posts").child(user.uid)
         
         reference.observeSingleEvent(of: .value, with: { (snapshot) in
+            
+            self.collectionView.refreshControl?.endRefreshing()
             
         guard let dictionary = snapshot.value as? [String: Any] else { return }
 

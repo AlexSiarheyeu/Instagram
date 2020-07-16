@@ -34,6 +34,8 @@ class SharePhotoController: UIViewController {
         return tv
     }()
         
+    static let updateFeedNotificationName = NSNotification.Name(rawValue: "UpdateFeed")
+
     //MARK: - View Controller Lifecycle
 
     override func viewDidLoad() {
@@ -106,6 +108,8 @@ class SharePhotoController: UIViewController {
                 return
             }
             self.dismiss(animated: true)
+            
+            NotificationCenter.default.post(name: SharePhotoController.updateFeedNotificationName, object: nil)
         }
     }
 
