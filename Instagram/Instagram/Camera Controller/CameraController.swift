@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class CameraController: UIViewController {
+class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     
     let capturePhotoButton: UIButton = {
         let button = UIButton(type: .system)
@@ -27,6 +27,8 @@ class CameraController: UIViewController {
         return button
     }()
     
+    let output = AVCapturePhotoOutput()
+
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -34,10 +36,32 @@ class CameraController: UIViewController {
         setupHUD()
     }
     
+    func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
+        
+        guard let imageDate = photo.fileDataRepresentation() else { return }
+        
+        let previewImage = UIImage(data: imageDate)
+        let previewImageView = UIImageView(image: previewImage)
+        
+        previewImageView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(previewImageView)
+        
+        NSLayoutConstraint.activate([
+            previewImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            previewImageView.heightAnchor.constraint(equalTo: view.heightAnchor),
+        ])
+    }
+
     @objc func handleCapturePhoto() {
         
+        let settings = AVCapturePhotoSettings()
+        
+        guard let previewFormatType = settings.availablePreviewPhotoPixelFormatTypes.first else { return }
+        
+        settings.previewPhotoFormat = [kCVPixelBufferPixelFormatTypeKey as String: previewFormatType]
+        output.capturePhoto(with: settings, delegate: self)
     }
-    
+
     @objc func handleDismiss() {
         dismiss(animated: true, completion: nil)
     }
@@ -71,7 +95,6 @@ class CameraController: UIViewController {
         }
         
         //2. setup outputs
-        let output = AVCapturePhotoOutput()
         if captureSesseion.canAddOutput(output) {
             captureSesseion.addOutput(output)
         }
