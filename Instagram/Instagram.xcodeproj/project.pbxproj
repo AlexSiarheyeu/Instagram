@@ -20,6 +20,7 @@
 		BC718EA924A11BC4000FA97A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC718EA724A11BC4000FA97A /* Main.storyboard */; };
 		BC718EAB24A11BC9000FA97A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = BC718EAA24A11BC9000FA97A /* Assets.xcassets */; };
 		BC718EAE24A11BC9000FA97A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC718EAC24A11BC9000FA97A /* LaunchScreen.storyboard */; };
+		BC78E7C424C25B17005DDA06 /* PreviewPhotoContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC78E7C324C25B17005DDA06 /* PreviewPhotoContainerView.swift */; };
 		BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */; };
 		BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */; };
 		BC88374B24A903BB009C0058 /* PhotoSelectorController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */; };
@@ -55,6 +56,7 @@
 		BC718EAA24A11BC9000FA97A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		BC718EAD24A11BC9000FA97A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		BC718EAF24A11BC9000FA97A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		BC78E7C324C25B17005DDA06 /* PreviewPhotoContainerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewPhotoContainerView.swift; sourceTree = "<group>"; };
 		BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
 		BC7E12BB24A39F070076F6B8 /* UserProfileController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfileController.swift; sourceTree = "<group>"; };
 		BC88374A24A903BB009C0058 /* PhotoSelectorController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorController.swift; sourceTree = "<group>"; };
@@ -129,6 +131,7 @@
 			isa = PBXGroup;
 			children = (
 				BC6DB10D24C20D660040F60B /* CameraController.swift */,
+				BC78E7C324C25B17005DDA06 /* PreviewPhotoContainerView.swift */,
 			);
 			path = "Camera Controller";
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				BCA7929424AE7EFF00E6ED29 /* Post.swift in Sources */,
 				BC4D8DD224C0432600C131A8 /* Date+DisplayDate.swift in Sources */,
 				BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */,
+				BC78E7C424C25B17005DDA06 /* PreviewPhotoContainerView.swift in Sources */,
 				BC88374D24A916B0009C0058 /* PhotoSelectorCell.swift in Sources */,
 				BC7E12BA24A39D8C0076F6B8 /* MainTabBarController.swift in Sources */,
 				BC7E12BC24A39F070076F6B8 /* UserProfileController.swift in Sources */,
@@ -516,7 +520,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5WFMH6Q63;
 				INFOPLIST_FILE = Instagram/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -536,7 +540,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = P5WFMH6Q63;
 				INFOPLIST_FILE = Instagram/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.5;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

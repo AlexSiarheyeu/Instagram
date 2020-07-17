@@ -11,6 +11,8 @@ import AVFoundation
 
 class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     
+    //MARK: - Properties
+    
     let capturePhotoButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -19,7 +21,7 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         return button
     }()
     
-    let dismisskButton: UIButton = {
+    let dismissButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
         button.setImage(UIImage(named: "right_arrow_shadow")?.withRenderingMode(.alwaysOriginal), for: .normal)
@@ -28,7 +30,9 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
     }()
     
     let output = AVCapturePhotoOutput()
-
+    
+    //MARK: - View Controller lifecycle
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -36,22 +40,26 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         setupHUD()
     }
     
+    override var prefersStatusBarHidden: Bool { true }
+    //MARK: - Photo Capture Delegate
+    
     func photoOutput(_ output: AVCapturePhotoOutput, didFinishProcessingPhoto photo: AVCapturePhoto, error: Error?) {
         
         guard let imageDate = photo.fileDataRepresentation() else { return }
         
         let previewImage = UIImage(data: imageDate)
-        let previewImageView = UIImageView(image: previewImage)
         
-        previewImageView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(previewImageView)
+        let containerView = PreviewPhotoContainerView()
+        containerView.previewImageView.image = previewImage
+        view.addSubview(containerView)
         
         NSLayoutConstraint.activate([
-            previewImageView.widthAnchor.constraint(equalTo: view.widthAnchor),
-            previewImageView.heightAnchor.constraint(equalTo: view.heightAnchor),
+            containerView.widthAnchor.constraint(equalTo: view.widthAnchor),
+            containerView.heightAnchor.constraint(equalTo: view.heightAnchor),
         ])
     }
-
+    //MARK: - Action methods for selectors
+    
     @objc func handleCapturePhoto() {
         
         let settings = AVCapturePhotoSettings()
@@ -66,16 +74,18 @@ class CameraController: UIViewController, AVCapturePhotoCaptureDelegate {
         dismiss(animated: true, completion: nil)
     }
     
+    //MARK: - Private methods
+    
     fileprivate func setupHUD() {
         view.addSubview(capturePhotoButton)
-        view.addSubview(dismisskButton)
+        view.addSubview(dismissButton)
            
         NSLayoutConstraint.activate([
             capturePhotoButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -50),
             capturePhotoButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
                       
-            dismisskButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
-            dismisskButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
+            dismissButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -40),
+            dismissButton.topAnchor.constraint(equalTo: view.topAnchor, constant: 20)
         ])
     }
     
