@@ -14,6 +14,7 @@
 		BC46BE5724B652C900D43620 /* UserSearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC46BE5624B652C900D43620 /* UserSearchCell.swift */; };
 		BC4D8DD224C0432600C131A8 /* Date+DisplayDate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC4D8DD124C0432600C131A8 /* Date+DisplayDate.swift */; };
 		BC5996CC24AA5A9F005E234A /* PhotoSelectorHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */; };
+		BC6DB10E24C20D660040F60B /* CameraController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC6DB10D24C20D660040F60B /* CameraController.swift */; };
 		BC718EA224A11BC4000FA97A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA124A11BC4000FA97A /* AppDelegate.swift */; };
 		BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BC718EA524A11BC4000FA97A /* SignUpController.swift */; };
 		BC718EA924A11BC4000FA97A /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = BC718EA724A11BC4000FA97A /* Main.storyboard */; };
@@ -46,6 +47,7 @@
 		BC46BE5624B652C900D43620 /* UserSearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSearchCell.swift; sourceTree = "<group>"; };
 		BC4D8DD124C0432600C131A8 /* Date+DisplayDate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+DisplayDate.swift"; sourceTree = "<group>"; };
 		BC5996CB24AA5A9F005E234A /* PhotoSelectorHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoSelectorHeader.swift; sourceTree = "<group>"; };
+		BC6DB10D24C20D660040F60B /* CameraController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraController.swift; sourceTree = "<group>"; };
 		BC718E9E24A11BC4000FA97A /* Instagram.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Instagram.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		BC718EA124A11BC4000FA97A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		BC718EA524A11BC4000FA97A /* SignUpController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignUpController.swift; sourceTree = "<group>"; };
@@ -123,6 +125,14 @@
 			path = "User Search";
 			sourceTree = "<group>";
 		};
+		BC6DB10F24C20D6D0040F60B /* Camera Controller */ = {
+			isa = PBXGroup;
+			children = (
+				BC6DB10D24C20D660040F60B /* CameraController.swift */,
+			);
+			path = "Camera Controller";
+			sourceTree = "<group>";
+		};
 		BC718E9524A11BC4000FA97A = {
 			isa = PBXGroup;
 			children = (
@@ -145,6 +155,7 @@
 			isa = PBXGroup;
 			children = (
 				BC7E12B924A39D8C0076F6B8 /* MainTabBarController.swift */,
+				BC6DB10F24C20D6D0040F60B /* Camera Controller */,
 				BC46BE5324B6356600D43620 /* User Search */,
 				BC0F30DA24B0B91D009D809C /* Downloader */,
 				BCA7929024AE7C9200E6ED29 /* Models */,
@@ -342,6 +353,7 @@
 				BC46BE5524B6357900D43620 /* UserSearchController.swift in Sources */,
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
 				BC8C42D024B4CCFB00013B0A /* Database + FetchUser.swift in Sources */,
+				BC6DB10E24C20D660040F60B /* CameraController.swift in Sources */,
 				BCA7929624AE829100E6ED29 /* UserProfilePhotoCell.swift in Sources */,
 				BCE9DEBA24A21C5C00F4AB91 /* UIColor + RGB.swift in Sources */,
 				BC0F30D924B0A97C009D809C /* CustomImageView.swift in Sources */,

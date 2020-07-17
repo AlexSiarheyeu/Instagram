@@ -70,6 +70,11 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     @objc func handleUpdateFeed() {
         handleRefresh()
     }
+    
+    @objc func handleCamera() {
+        let cameraVC = CameraController()
+        present(cameraVC, animated: true)
+    }
     //MARK: - Private methods
     
     fileprivate func fetchAllPosts() {
@@ -95,6 +100,8 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     
     fileprivate func setupNaviagationItems() {
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera3")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
     }
     
     fileprivate func fetchPosts(){
