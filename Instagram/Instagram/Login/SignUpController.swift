@@ -108,6 +108,7 @@ class SignUpController: UIViewController, UIImagePickerControllerDelegate, UINav
     
     //MARK: - Action methods for selectors
     
+    @available(iOS 13.0, *)
     @objc func handleSignUp() {
         
         guard let email = emailTextField.text,

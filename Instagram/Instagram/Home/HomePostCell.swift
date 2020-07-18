@@ -51,7 +51,11 @@ class HomePostCell: UICollectionViewCell {
     
     let optionsButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setImage(UIImage(systemName: "ellipsis")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(UIImage(systemName: "ellipsis")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -59,28 +63,44 @@ class HomePostCell: UICollectionViewCell {
     let likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "like_unselected")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(UIImage(named: "like_unselected")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
         return button
     }()
     
     let commentButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "comment")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(UIImage(named: "comment")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
         return button
     }()
     
     let sendMessageButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "send2")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(UIImage(named: "send2")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
         return button
     }()
     
     let bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        button.setImage(UIImage(named: "ribbon")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        if #available(iOS 13.0, *) {
+            button.setImage(UIImage(named: "ribbon")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        } else {
+            // Fallback on earlier versions
+        }
         return button
     }()
     

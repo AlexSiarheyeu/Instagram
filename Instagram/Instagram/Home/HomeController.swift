@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+@available(iOS 13.0, *)
 class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
     //MARK: - Properties
@@ -31,7 +32,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
         collectionView.refreshControl = refreshControl
-        
         
         setupNaviagationItems()
         fetchAllPosts()
@@ -98,12 +98,14 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
       }
     }
     
+    
     fileprivate func setupNaviagationItems() {
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera3")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
-    }
+        }
     
+
     fileprivate func fetchPosts(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
 

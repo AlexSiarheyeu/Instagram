@@ -9,6 +9,7 @@
 import UIKit
 import Firebase
 
+@available(iOS 13.0, *)
 class LoginController: UIViewController {
     
     //MARK: View Controller Lifecycle
