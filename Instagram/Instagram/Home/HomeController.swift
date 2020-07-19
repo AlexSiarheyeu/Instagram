@@ -9,14 +9,12 @@
 import UIKit
 import Firebase
 
-@available(iOS 13.0, *)
-class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLayout, HomePostCellDelegate {
     
     //MARK: - Properties
 
     let cellId = "cellId"
     var posts = [Post]()
-    
     
     //MARK: - View Controller Lifecycle
 
@@ -27,7 +25,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
         
         collectionView.register(HomePostCell.self, forCellWithReuseIdentifier: cellId)
         collectionView.backgroundColor = .white
-        
         
         let refreshControl = UIRefreshControl()
         refreshControl.addTarget(self, action: #selector(handleRefresh), for: .valueChanged)
@@ -46,6 +43,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: cellId, for: indexPath) as! HomePostCell
         cell.post = posts[indexPath.row]
+        cell.delegate = self
         return cell
     }
     
@@ -60,7 +58,7 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     
     //MARK: - Action methods for selectors
-    
+    //??? when reloading fetch all posts to home controller again ???
     @objc func handleRefresh() {
         //posts.removeAll()
         fetchAllPosts()
@@ -77,6 +75,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
     }
     //MARK: - Private methods
     
+    func didTapComment(post: Post) {
+        print(post.caption)
+        let commentsVC = CommentsController(collectionViewLayout: UICollectionViewFlowLayout())
+        navigationController?.pushViewController(commentsVC, animated: true)
+    }
+   
     fileprivate func fetchAllPosts() {
         fetchPosts()
         fetchFollowingUsersId()
@@ -98,14 +102,12 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
       }
     }
     
-    
     fileprivate func setupNaviagationItems() {
         navigationItem.titleView = UIImageView(image: UIImage(named: "logo2"))
         
         navigationItem.leftBarButtonItem = UIBarButtonItem(image: UIImage(named: "camera3")?.withTintColor(.black, renderingMode: .alwaysOriginal), style: .plain, target: self, action: #selector(handleCamera))
         }
     
-
     fileprivate func fetchPosts(){
         guard let uid = Auth.auth().currentUser?.uid else { return }
 
@@ -133,7 +135,6 @@ class HomeController: UICollectionViewController, UICollectionViewDelegateFlowLa
             self.posts.sort { (p1, p2) -> Bool in
                 return p1.creationDate.compare(p2.creationDate) == .orderedDescending
             }
-            
             
             self.collectionView.reloadData()
             

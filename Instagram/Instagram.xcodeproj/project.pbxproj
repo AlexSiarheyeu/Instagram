@@ -33,6 +33,7 @@
 		BCA7929624AE829100E6ED29 /* UserProfilePhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCA7929524AE829100E6ED29 /* UserProfilePhotoCell.swift */; };
 		BCB7716B24A3BFED00A2B702 /* UserProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */; };
 		BCBAC93524AB9DCA007E86DD /* SharePhotoController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */; };
+		BCE54D4924C43FB6000648D0 /* CommentsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE54D4824C43FB6000648D0 /* CommentsController.swift */; };
 		BCE9DEBA24A21C5C00F4AB91 /* UIColor + RGB.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCE9DEB924A21C5C00F4AB91 /* UIColor + RGB.swift */; };
 		BCE9DEBC24A2230900F4AB91 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */; };
 		BCF44B9424A765DC00B13B05 /* LoginController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCF44B9324A765DC00B13B05 /* LoginController.swift */; };
@@ -71,6 +72,7 @@
 		BCA7929524AE829100E6ED29 /* UserProfilePhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserProfilePhotoCell.swift; sourceTree = "<group>"; };
 		BCB7716A24A3BFED00A2B702 /* UserProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfileHeader.swift; sourceTree = "<group>"; };
 		BCBAC93424AB9DCA007E86DD /* SharePhotoController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SharePhotoController.swift; sourceTree = "<group>"; };
+		BCE54D4824C43FB6000648D0 /* CommentsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommentsController.swift; sourceTree = "<group>"; };
 		BCE9DEB924A21C5C00F4AB91 /* UIColor + RGB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor + RGB.swift"; sourceTree = "<group>"; };
 		BCE9DEBB24A2230900F4AB91 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		BCF44B9324A765DC00B13B05 /* LoginController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginController.swift; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 			children = (
 				BC0F30DC24B0BA35009D809C /* HomeController.swift */,
 				BC0F30DE24B0DF30009D809C /* HomePostCell.swift */,
+				BCE54D4824C43FB6000648D0 /* CommentsController.swift */,
 			);
 			path = Home;
 			sourceTree = "<group>";
@@ -361,6 +364,7 @@
 				BC78E7C824C2E794005DDA06 /* CustomAnimationDismisser.swift in Sources */,
 				BC0F30DF24B0DF30009D809C /* HomePostCell.swift in Sources */,
 				BC46BE5524B6357900D43620 /* UserSearchController.swift in Sources */,
+				BCE54D4924C43FB6000648D0 /* CommentsController.swift in Sources */,
 				BC718EA624A11BC4000FA97A /* SignUpController.swift in Sources */,
 				BC8C42D024B4CCFB00013B0A /* Database + FetchUser.swift in Sources */,
 				BC6DB10E24C20D660040F60B /* CameraController.swift in Sources */,

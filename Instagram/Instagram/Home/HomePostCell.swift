@@ -8,10 +8,16 @@
 
 import UIKit
 
-class HomePostCell: UICollectionViewCell {
-    
-    //MARK: - Properties
+protocol HomePostCellDelegate {
+    func didTapComment(post: Post)
+}
 
+class HomePostCell: UICollectionViewCell {
+   
+    //MARK: - Properties
+    
+    var delegate: HomePostCellDelegate!
+        
     var post: Post? {
         didSet {
             guard let imageUrl = post?.imageUrl else { return }
@@ -51,11 +57,7 @@ class HomePostCell: UICollectionViewCell {
     
     let optionsButton: UIButton = {
         let button = UIButton(type: .system)
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(systemName: "ellipsis")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-        } else {
-            // Fallback on earlier versions
-        }
+        button.setImage(UIImage(systemName: "ellipsis")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -63,44 +65,32 @@ class HomePostCell: UICollectionViewCell {
     let likeButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(named: "like_unselected")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-        } else {
-            // Fallback on earlier versions
-        }
+        button.setImage(UIImage(named: "like_unselected")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        
         return button
     }()
     
-    let commentButton: UIButton = {
+    lazy var commentButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(named: "comment")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-        } else {
-            // Fallback on earlier versions
-        }
+        button.setImage(UIImage(named: "comment")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        button.addTarget(self, action: #selector(handleComment), for: .touchUpInside)
         return button
     }()
     
     let sendMessageButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(named: "send2")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-        } else {
-            // Fallback on earlier versions
-        }
+        button.setImage(UIImage(named: "send2")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        
         return button
     }()
     
     let bookmarkButton: UIButton = {
         let button = UIButton(type: .system)
         button.translatesAutoresizingMaskIntoConstraints = false
-        if #available(iOS 13.0, *) {
-            button.setImage(UIImage(named: "ribbon")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
-        } else {
-            // Fallback on earlier versions
-        }
+        button.setImage(UIImage(named: "ribbon")?.withTintColor(.black, renderingMode: .alwaysOriginal), for: .normal)
+        
         return button
     }()
     
@@ -117,8 +107,7 @@ class HomePostCell: UICollectionViewCell {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-                
-        
+       
         addSubview(userProfileImageView)
         userProfileImageView.layer.cornerRadius = 40/2
 
@@ -157,6 +146,11 @@ class HomePostCell: UICollectionViewCell {
             captionLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 8),
             captionLabel.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -8)
         ])
+    }
+    
+    @objc func handleComment() {
+        guard let post = post else { return }
+        self.delegate.didTapComment(post: post)
     }
     
     //MARK: - Private methods
@@ -207,4 +201,5 @@ class HomePostCell: UICollectionViewCell {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
 }
